@@ -1,109 +1,30 @@
-# Remix Indie Stack without DB
+# The F2E WEEK1 - Landing Page
 
-![The Remix Indie Stack](https://repository-images.githubusercontent.com/465928257/a241fa49-bd4d-485a-a2a5-5cb8e4ee0abf)
+## Design Concept
 
-Learn more about [Remix Stacks](https://remix.run/stacks).
+### 整體網站視覺
 
-```
-npx create-remix@latest --template remix-run/indie-stack
-```
+利用 3D 圖標、霓虹效果保留原來活動網站的「遊戲」設計主題，也加上一些比較酷炫的跑馬燈讓整體視覺更吸睛。
 
-## What's in the stack
+### 資訊呈現
 
-- [Fly app deployment](https://fly.io) with [Docker](https://www.docker.com/)
-- Healthcheck endpoint for [Fly backups region fallbacks](https://fly.io/docs/reference/configuration/#services-http_checks)
-- [GitHub Actions](https://github.com/features/actions) for deploy on merge to production and staging environments
-- Styling with [Tailwind](https://tailwindcss.com/)
-- End-to-end testing with [Cypress](https://cypress.io)
-- Local third party request mocking with [MSW](https://mswjs.io)
-- Unit testing with [Vitest](https://vitest.dev) and [Testing Library](https://testing-library.com)
-- Code formatting with [Prettier](https://prettier.io)
-- Linting with [ESLint](https://eslint.org)
-- Static Types with [TypeScript](https://typescriptlang.org)
+資訊主要以卡片呈現，同時也利用標題和顏色凸顯重要資訊，協助瀏覽者快速抓到重點。
 
-Not a fan of bits of the stack? Fork it, change it, and use `npx create-remix --template your/repo`! Make it your own.
+> 配色的選用非常重要，對比度不夠，
+> 不僅是讓色盲用戶無法判讀，對於一般人類的視覺聚焦都是非常困難的。
 
-## Development
+### 網站互動性
 
-- Start dev server:
+為了增加瀏覽者與網頁的互動，在部分卡片上有設計 hover 效果，協助瀏覽者 highlight 正在閱讀的資訊，同時也添趣味性。
 
-  ```sh
-  npm run dev
-  ```
+另外部分區塊有包含遊戲互動設計，例如「關卡資訊」區塊將三個關卡資訊設計成三個闖關的關卡卡片，透過動態效果帶給瀏覽者驚喜感。在「獎項設計」區塊展現賽車比賽的動效，提供瀏覽者一個有趣的小體驗。
 
-This starts your app in development mode, rebuilding assets on file changes.
+### CTA 按鈕設計
 
-## Deployment
+CTA 按鈕擺放於頂部 Banner 區塊以及常見問題區塊，以利瀏覽者找到報名入口。
 
-This Remix Stack comes with two GitHub Actions that handle automatically deploying your app to production and staging environments.
+頂部 Banner 區塊 CTA 按鈕目標受眾：
+已知道/已了解活動，且想在進入活動網頁後立即報名的用戶
 
-Prior to your first deployment, you'll need to do a few things:
-
-- [Install Fly](https://fly.io/docs/getting-started/installing-flyctl/)
-
-- Sign up and log in to Fly
-
-  ```sh
-  fly auth signup
-  ```
-
-  > **Note:** If you have more than one Fly account, ensure that you are signed into the same account in the Fly CLI as you are in the browser. In your terminal, run `fly auth whoami` and ensure the email matches the Fly account signed into the browser.
-
-- Create two apps on Fly, one for staging and one for production:
-
-  ```sh
-  fly apps create the-f2e-week1-landing-page
-  fly apps create the-f2e-week1-landing-page-staging
-  ```
-
-  > **Note:** Make sure this name matches the `app` set in your `fly.toml` file. Otherwise, you will not be able to deploy.
-
-  - Initialize Git.
-
-  ```sh
-  git init
-  ```
-
-- Create a new [GitHub Repository](https://repo.new), and then add it as the remote for your project. **Do not push your app yet!**
-
-  ```sh
-  git remote add origin <ORIGIN_URL>
-  ```
-
-- Add a `FLY_API_TOKEN` to your GitHub repo. To do this, go to your user settings on Fly and create a new [token](https://web.fly.io/user/personal_access_tokens/new), then add it to [your repo secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) with the name `FLY_API_TOKEN`.
-
-Now that everything is set up you can commit and push your changes to your repo. Every commit to your `main` branch will trigger a deployment to your production environment, and every commit to your `dev` branch will trigger a deployment to your staging environment.
-
-### Getting Help with Deployment
-
-If you run into any issues deploying to Fly, make sure you've followed all of the steps above and if you have, then post as many details about your deployment (including your app name) to [the Fly support community](https://community.fly.io). They're normally pretty responsive over there and hopefully can help resolve any of your deployment issues and questions.
-
-## GitHub Actions
-
-We use GitHub Actions for continuous integration and deployment. Anything that gets into the `main` branch will be deployed to production after running tests/build/etc. Anything in the `dev` branch will be deployed to staging.
-
-## Testing
-
-### Cypress
-
-We use Cypress for our End-to-End tests in this project. You'll find those in the `cypress` directory. As you make changes, add to an existing file or create a new file in the `cypress/e2e` directory to test your changes.
-
-We use [`@testing-library/cypress`](https://testing-library.com/cypress) for selecting elements on the page semantically.
-
-To run these tests in development, run `npm run test:e2e:dev` which will start the dev server for the app as well as the Cypress client. Make sure the database is running in docker as described above.
-
-### Vitest
-
-For lower level tests of utilities and individual components, we use `vitest`. We have DOM-specific assertion helpers via [`@testing-library/jest-dom`](https://testing-library.com/jest-dom).
-
-### Type Checking
-
-This project uses TypeScript. It's recommended to get TypeScript set up for your editor to get a really great in-editor experience with type checking and auto-complete. To run type checking across the whole project, run `npm run typecheck`.
-
-### Linting
-
-This project uses ESLint for linting. That is configured in `.eslintrc.js`.
-
-### Formatting
-
-We use [Prettier](https://prettier.io/) for auto-formatting in this project. It's recommended to install an editor plugin (like the [VSCode Prettier plugin](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)) to get auto-formatting on save. There's also a `npm run format` script you can run to format all files in the project.
+常見問題區塊 CTA 按鈕受眾：
+首次瀏覽活動資訊，閱讀完整體資訊想要報名的用戶
