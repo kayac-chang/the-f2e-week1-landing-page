@@ -21,8 +21,7 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href:
-      "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap",
   },
   {
     rel: "stylesheet",
@@ -44,16 +43,27 @@ export async function loader() {
   return json({});
 }
 
+function Footer() {
+  return (
+    <footer className="flex p-4">
+      <small className="mx-auto text-center font-montserrat">
+        Copyright © 2022 HexSchool.All rights reserved.
+      </small>
+    </footer>
+  );
+}
+
 export default function App() {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en">
       <head>
         <Meta />
         <Links />
       </head>
-      <body className="h-full bg-neutral-5 text-white">
+      <body className="max-h-screen bg-neutral-5 text-white">
         <Header />
         <Outlet />
+        <Footer />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

@@ -7,9 +7,9 @@ module.exports = {
     extend: {
       fontFamily: {
         "noto-sans-tc": ["Noto Sans TC", "sans-serif"],
-        "montserrat": ['Montserrat', "sans-serif"],
+        montserrat: ["Montserrat", "sans-serif"],
         "monument-extended": ["Monument Extended", "sans-serif"],
-        "pilot-command-italic": ["Pilot Command Italic", 'sans-serif']
+        "pilot-command-italic": ["Pilot Command Italic", "sans-serif"],
       },
       fontSize: {
         // CH Heading
@@ -71,6 +71,7 @@ module.exports = {
     },
   },
   plugins: [
+    require("tailwindcss-aria-plugin"),
     plugin(({ matchUtilities, theme }) => {
       matchUtilities(
         {

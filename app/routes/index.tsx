@@ -3,10 +3,17 @@ import { range } from "ramda";
 import { Fragment } from "react";
 import SVG from "~/components/SVG";
 import { GlitchText, NeonText } from "~/components/RichText";
+import Tabs from "~/components/Tabs";
 
-const section = "flex flex-col w-full min-h-screen overflow-hidden";
-const marquee = "gap-6 flex flex-nowrap items-center";
-const card = "flex flex-col items-center gap-4 rounded-3xl";
+const flex = {
+  col: "flex flex-col",
+  col_center: "flex flex-col items-center",
+  row_center: "flex flex-row items-center",
+  nowrap: "flex flex-nowrap items-center [&>*]:whitespace-nowrap",
+};
+const section = clsx(flex.col, "w-full min-h-screen overflow-hidden");
+const marquee = clsx("gap-6", flex.nowrap);
+const card = clsx(flex.col_center, "gap-4 rounded-3xl");
 const badge = "bg-secondary-1 w-max py-1 px-2 rounded-xl";
 
 function Section1() {
@@ -40,7 +47,7 @@ function Section1() {
 
       {/* fade in / move up */}
       <GlitchText
-        className="block font-pilot-command-italic h3 tracking-[0.2em]"
+        className="h3 block font-pilot-command-italic tracking-[0.2em]"
         offset={2}
       >
         4TH
@@ -48,14 +55,14 @@ function Section1() {
 
       {/* fade in / move up */}
       <GlitchText
-        className="block font-monument-extended h2 tracking-[0.2em]"
+        className="h2 block font-monument-extended tracking-[0.2em]"
         offset={3}
       >
         THE F2E
       </GlitchText>
 
       {/* title */}
-      <h1 className={clsx("ch h5 tracking-[1rem]", "text-center w-max")}>
+      <h1 className={clsx("ch h5 tracking-[1rem]", "w-max text-center")}>
         互動式網頁設計
       </h1>
 
@@ -76,7 +83,7 @@ function Section1() {
       <div className={clsx("mt-auto", marquee)}>
         {range(0, 3).map((i) => (
           <Fragment key={i}>
-            <NeonText className="font-monument-extended h4 uppercase w-max">
+            <NeonText className="h4 w-max font-monument-extended uppercase">
               join us
             </NeonText>
             <SVG
@@ -95,98 +102,98 @@ function Section2() {
     <section className={clsx(section, "py-24 px-6")}>
       <h2 className="sr-only">questions</h2>
 
-      <div className="flex-1 relative">
+      <div className="relative flex-1">
         <img
-          className="w-28 absolute bottom-32 left-14"
+          className="absolute bottom-32 left-14 w-28"
           src={require("~/assets/image/dialog/dialog-1.png")}
           role="presentation"
           alt="presentation"
         />
 
         <SVG
-          className="w-6 absolute bottom-36 right-32"
+          className="absolute bottom-36 right-32 w-6"
           src={require("~/assets/icon/star.svg")}
         />
 
         <img
-          className="w-16 absolute bottom-32 right-10"
+          className="absolute bottom-32 right-10 w-16"
           src={require("~/assets/image/dialog/dialog-2.png")}
           role="presentation"
           alt="presentation"
         />
 
         <div className="absolute bottom-0">
-          <div className="relative flex justify-center w-max">
+          <div className="relative flex w-max justify-center">
             <img
               className="w-72"
               src={require("~/assets/image/dialog/dialog-purple.png")}
               role="presentation"
               alt="presentation"
             />
-            <span className="absolute top-7 text-neutral-5 ch h5 rotate-[-4deg]">
+            <span className="ch h5 absolute top-7 rotate-[-4deg] text-neutral-5">
               羨慕別人的酷酷網頁動畫？
             </span>
           </div>
         </div>
       </div>
 
-      <div className="flex-1 relative">
+      <div className="relative flex-1">
         <SVG
-          className="w-4 absolute top-20 left-16"
+          className="absolute top-20 left-16 w-4"
           src={require("~/assets/icon/circle.svg")}
         />
 
         <img
-          className="w-24 absolute bottom-4"
+          className="absolute bottom-4 w-24"
           src={require("~/assets/image/dialog/dialog-3.png")}
           role="presentation"
           alt="presentation"
         />
 
         <SVG
-          className="w-12 absolute bottom-8 right-8"
+          className="absolute bottom-8 right-8 w-12"
           src={require("~/assets/icon/triangle.svg")}
         />
 
         <div className="absolute right-0 top-10">
-          <div className="relative flex justify-center w-max rotate-6">
+          <div className="relative flex w-max rotate-6 justify-center">
             <img
               className="w-64"
               src={require("~/assets/image/dialog/dialog-green.png")}
               role="presentation"
               alt="presentation"
             />
-            <span className="absolute top-12 text-neutral-5 ch h5 rotate-[-12deg]">
+            <span className="ch h5 absolute top-12 rotate-[-12deg] text-neutral-5">
               滿足不了同事的許願？
             </span>
           </div>
         </div>
       </div>
 
-      <div className="flex-1 relative">
+      <div className="relative flex-1">
         <img
-          className="w-20 absolute right-2 bottom-6"
+          className="absolute right-2 bottom-6 w-20"
           src={require("~/assets/image/dialog/dialog-4.png")}
           role="presentation"
           alt="presentation"
         />
 
         <img
-          className="w-32 absolute left-28"
+          className="absolute left-28 w-32"
           src={require("~/assets/image/dialog/dialog-5.png")}
           role="presentation"
           alt="presentation"
         />
 
         <div className="absolute top-16">
-          <div className="relative flex justify-center w-max -rotate-6">
+          <div className="relative flex w-max -rotate-6 justify-center">
             <img
               className="w-72"
               src={require("~/assets/image/dialog/dialog-purple.png")}
               role="presentation"
               alt="presentation"
             />
-            <span className="absolute top-7 text-neutral-5 ch h5 rotate-[-2deg]">
+            <span className="ch h5 absolute top-7 rotate-[-2deg] text-neutral-5">
               動畫技能樹太雜無從下手？
             </span>
           </div>
@@ -204,7 +211,7 @@ function Section3() {
 
         {/* background */}
         <img
-          className="h-full object-cover absolute inset-0 -z-10"
+          className="absolute inset-0 -z-10 h-full object-cover"
           src={require("~/assets/image/background.jpg")}
           role="presentation"
           alt="presentation"
@@ -213,11 +220,11 @@ function Section3() {
         {/* marquee */}
         <div
           className={clsx(
-            "bg-gradient-to-r gradient-decoration py-2 px-2",
+            "gradient-decoration bg-gradient-to-r py-2 px-2",
             marquee
           )}
         >
-          <span className="font-monument-extended p2 uppercase whitespace-nowrap tracking-[0.1em]">
+          <span className="p2 whitespace-nowrap font-monument-extended uppercase tracking-[0.1em]">
             Interactive web design
           </span>
           <img
@@ -228,10 +235,10 @@ function Section3() {
         </div>
 
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="relative flex justify-center items-center">
+          <div className="relative flex items-center justify-center">
             {/* right hand */}
             <img
-              className="w-48 absolute -translate-y-[90%] rotate-[-54deg]"
+              className="absolute w-48 -translate-y-[90%] rotate-[-54deg]"
               src={require("~/assets/image/right-hand.png")}
               role="presentation"
               alt="presentation"
@@ -239,7 +246,7 @@ function Section3() {
 
             {/* left hand */}
             <img
-              className="w-48 absolute translate-y-[90%] -scale-100 rotate-[48deg]"
+              className="absolute w-48 translate-y-[90%] rotate-[48deg] -scale-100"
               src={require("~/assets/image/left-hand.png")}
               role="presentation"
               alt="presentation"
@@ -262,13 +269,13 @@ function Section3() {
             />
 
             {/* title */}
-            <div className="relative flex justify-center items-center w-[75vw]">
+            <div className="relative flex w-[75vw] items-center justify-center">
               <SVG
                 className="w-full"
                 src={require("~/assets/icon/dialog-strong.svg")}
               />
               <SVG
-                className="w-11/12 absolute"
+                className="absolute w-11/12"
                 src={require("~/assets/icon/title.svg")}
               />
               <h2 className="sr-only">互動式網頁設計</h2>
@@ -285,7 +292,7 @@ function Section4() {
     <section
       className={clsx(
         section,
-        "pt-40 pb-16 px-8",
+        "px-8 pt-40 pb-16",
         "items-center gap-12",
         "text-center"
       )}
@@ -296,14 +303,14 @@ function Section4() {
           "rounded-full",
           "text-secondary-1",
           "border-4 border-secondary-1",
-          "shadow text-shadow green",
+          "text-shadow green shadow",
           "px-12 py-4",
           "relative"
         )}
       >
         {/* light big */}
         <img
-          className="absolute right-0 bottom-full translate-x-4 w-12"
+          className="absolute right-0 bottom-full w-12 translate-x-4"
           src={require("~/assets/image/decoration/light.png")}
           role="presentation"
           alt="presentation"
@@ -331,7 +338,7 @@ function Section4() {
         <div>網頁互動挑戰關卡</div>
       </div>
 
-      <div className="grid w-full ch gap-12">
+      <div className="ch grid w-full gap-12">
         {/* card 1 */}
         <div className={clsx(card, "p-4", "bg-white text-primary-3")}>
           <div className={badge}>
@@ -349,8 +356,8 @@ function Section4() {
             alt="presentation"
           />
 
-          <div className="flex w-full justify-between items-center sub-title">
-            <p className="text-primary-2 en">WEEK 1</p>
+          <div className="sub-title flex w-full items-center justify-between">
+            <p className="en text-primary-2">WEEK 1</p>
 
             <a href="/" className="flex items-center">
               <strong>查看關卡細節</strong>
@@ -379,8 +386,8 @@ function Section4() {
             alt="presentation"
           />
 
-          <div className="flex w-full justify-between items-center sub-title">
-            <p className="text-primary-2 en">WEEK 2</p>
+          <div className="sub-title flex w-full items-center justify-between">
+            <p className="en text-primary-2">WEEK 2</p>
 
             <a href="/" className="flex items-center">
               <strong>查看關卡細節</strong>
@@ -409,8 +416,8 @@ function Section4() {
             alt="presentation"
           />
 
-          <div className="flex w-full justify-between items-center sub-title">
-            <p className="text-primary-2 en">WEEK 3</p>
+          <div className="sub-title flex w-full items-center justify-between">
+            <p className="en text-primary-2">WEEK 3</p>
 
             <a href="/" className="flex items-center">
               <strong>查看關卡細節</strong>
@@ -431,7 +438,7 @@ function Section5() {
     <section
       className={clsx(
         section,
-        "mt-20 pt-16 pb-16 px-4",
+        "mt-20 px-4 pt-16 pb-16",
         "items-center gap-12",
         "text-center",
         "bg-neutral-4"
@@ -439,7 +446,7 @@ function Section5() {
     >
       <h2 className="ch h3 flex items-center">
         <img
-          className="w-8 mr-2"
+          className="mr-2 w-8"
           src={require("~/assets/image/decoration/player.png")}
           role="presentation"
           alt="presentation"
@@ -461,7 +468,7 @@ function Section5() {
             alt="presentation"
           />
         </div>
-        <strong className="mx-4 whitespace-nowrap text-shadow white">
+        <strong className="text-shadow white mx-4 whitespace-nowrap">
           活動說明
         </strong>
 
@@ -502,12 +509,12 @@ function Section5() {
           <h3 className="font-bold">開放報名</h3>
 
           <div className="flex flex-col items-center gap-2">
-            <time className="flex gap-2 p2">
+            <time className="p2 flex gap-2">
               <span className="text-secondary-1">10/13</span>
               <span>(四) 早上 11:00</span>
             </time>
             <span>|</span>
-            <time className="flex gap-2 p2">
+            <time className="p2 flex gap-2">
               <span className="text-secondary-1">10/30</span>
               <span>(日) 晚上 23:59</span>
             </time>
@@ -535,11 +542,11 @@ function Section5() {
           <h3 className="font-bold">個組別開賽</h3>
 
           <div className="flex flex-col items-center gap-2">
-            <div className="flex gap-2 p2">
+            <div className="p2 flex gap-2">
               <span className="text-secondary-1">10/31</span>
               <span>UI組、團體組開賽</span>
             </div>
-            <div className="flex gap-2 p2">
+            <div className="p2 flex gap-2">
               <span className="text-secondary-1">11/07</span>
               <span>前端組開賽</span>
             </div>
@@ -569,12 +576,12 @@ function Section5() {
           <h3 className="font-bold">登錄作品</h3>
 
           <div className="flex flex-col items-center gap-2">
-            <time className="flex gap-2 p2">
+            <time className="p2 flex gap-2">
               <span className="text-secondary-1">10/31</span>
               <span>(一) 中午 12:00</span>
             </time>
             <span>|</span>
-            <time className="flex gap-2 p2">
+            <time className="p2 flex gap-2">
               <span className="text-secondary-1">11/28</span>
               <span>(一) 中午 12:00</span>
             </time>
@@ -602,7 +609,7 @@ function Section5() {
           <h3 className="font-bold">線上直播</h3>
 
           <div className="flex flex-col items-center gap-2">
-            <time className="flex gap-2 p2">
+            <time className="p2 flex gap-2">
               <span className="text-secondary-1">11/03 - 11/24</span>
               <span>每週四</span>
             </time>
@@ -619,12 +626,12 @@ function Section6() {
       className={clsx(
         section,
         "ch",
-        "mt-20 pt-16 pb-16 px-4",
+        "mt-20 px-4 pt-16 pb-16",
         "items-center gap-12"
       )}
     >
       <header className="w-full space-y-4">
-        <h2 className="h4 text-shadow white font-bold text-center">
+        <h2 className="h4 text-shadow white text-center font-bold">
           <div>區區修煉已經無法滿足了嗎？</div>
           <div>還有比賽等著你！</div>
         </h2>
@@ -654,16 +661,16 @@ function Section6() {
             alt="presentation"
           />
 
-          <h3 className="text-primary-1 font-bold text-shadow purple">
+          <h3 className="text-shadow purple font-bold text-primary-1">
             評審機制
           </h3>
 
-          <div className="space-y-2 w-full">
+          <div className="w-full space-y-2">
             <strong className="h4">初選：</strong>
             <p className="p2">將由六角學院前端、UI 評審進行第一波篩選。</p>
           </div>
 
-          <div className="space-y-2 w-full">
+          <div className="w-full space-y-2">
             <strong className="h4">決選：</strong>
             <p className="p2">
               由六角學院與贊助廠商討論，進行最後篩選，並於 12/30(五)
@@ -679,9 +686,9 @@ function Section6() {
             alt="presentation"
           />
 
-          <h3 className="text-primary-1 font-bold text-shadow purple">獎金</h3>
+          <h3 className="text-shadow purple font-bold text-primary-1">獎金</h3>
 
-          <div className="space-y-2 w-full p2">
+          <div className="p2 w-full space-y-2">
             <strong>初選佳作：</strong>
             <div className="space-x-2">
               <span>共六十位</span>
@@ -689,7 +696,7 @@ function Section6() {
             </div>
             <p className="p3 text-neutral-2">每週主題個人組十位、團體組十組</p>
           </div>
-          <div className="space-y-2 w-full p2">
+          <div className="p2 w-full space-y-2">
             <strong>個人企業獎：</strong>
             <div className="space-x-2">
               <span>共六位</span>
@@ -697,7 +704,7 @@ function Section6() {
             </div>
             <p className="p3 text-neutral-2">每週主題個人組十位、團體組十組</p>
           </div>
-          <div className="space-y-2 w-full p2">
+          <div className="p2 w-full space-y-2">
             <strong>初選佳作：</strong>
             <div className="space-x-2">
               <span>共六十位</span>
@@ -705,7 +712,7 @@ function Section6() {
             </div>
             <p className="p3 text-neutral-2">每週主題個人組十位、團體組十組</p>
           </div>
-          <div className="space-y-2 w-full p2">
+          <div className="p2 w-full space-y-2">
             <strong>團體企業獎：</strong>
             <div className="space-x-2">
               <span>共三組 </span>
@@ -714,9 +721,394 @@ function Section6() {
             <p className="p3 text-neutral-2">每週主題各 1 組</p>
           </div>
 
-          <p className="mt-2 p2 w-full">以上皆提供完賽數位獎狀</p>
+          <p className="p2 mt-2 w-full">以上皆提供完賽數位獎狀</p>
         </div>
       </div>
+    </section>
+  );
+}
+
+const tab = clsx(
+  "relative",
+  "aria-!selected:text-neutral-2",
+  "aria-!selected:after:hidden",
+  "after:block",
+  "after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2",
+  "after:h-1.5 after:w-5 after:rounded-3xl",
+  "shadow-secondary-1 after:bg-secondary-1 after:shadow",
+  "[&>*]:aria-selected:text-shadow [&>*]:aria-selected:shadow-white"
+);
+
+const panel = clsx(
+  card,
+  "bg-white text-neutral-5",
+  "gap-10 p-6",
+  "[&_[data-index]]:text-primary-3",
+  "[&_[data-index]]:en",
+  "[&_[data-index]]:text-en-h4",
+  "[&_h3]:text-ch-h4",
+  "[&_h3]:font-bold",
+  "[&_p]:text-ch-p2",
+  "[&_p]:mt-4"
+);
+
+function Section7() {
+  return (
+    <section
+      className={clsx(section, "ch", "px-4 pt-20 pb-16", "items-center gap-12")}
+    >
+      <h2 className="en h3 text-shadow text-center shadow-white">Q&A</h2>
+
+      <Tabs.Root className="w-full space-y-6">
+        <Tabs.List
+          className={clsx(
+            flex.nowrap,
+            "p2",
+            "gap-6",
+            "overflow-scroll",
+            "[&>*]:py-4"
+          )}
+        >
+          <Tabs.Tab className={tab} value="common">
+            <span>常見問題</span>
+          </Tabs.Tab>
+          <Tabs.Tab className={tab} value="ui">
+            <span>UI 設計師常見問題</span>
+          </Tabs.Tab>
+          <Tabs.Tab className={tab} value="frontend">
+            <span>前端工程師常見問題</span>
+          </Tabs.Tab>
+          <Tabs.Tab className={tab} value="group">
+            <span>團體組常見問題</span>
+          </Tabs.Tab>
+        </Tabs.List>
+
+        <Tabs.Panel value="common" className={panel}>
+          <section>
+            <div data-index>Q1</div>
+            <h3>如果某一週不想新挑戰失敗，是否能再繼續挑戰後面關卡？</h3>
+            <p>
+              可以，儘管那週挑戰失敗，之後您仍可以挑選喜歡的關卡進行挑戰，並在該關卡期限內繳交作品。
+            </p>
+          </section>
+          <section>
+            <div data-index>Q2</div>
+            <h3>大家都好強，我怕我做的東西沒有達到過關門檻，不敢登錄作業</h3>
+            <p>
+              這個活動並非競爭性質，每個參賽者都是你的隊友，最大的敵人是你自己，因為你必須定期練功前端開發，讓自己能夠順利完賽。
+            </p>
+          </section>
+          <section>
+            <div data-index>Q3</div>
+            <h3>
+              我不確定自己的版型有沒有符合過關門檻，要寫到什麼程度才有過關門檻？
+            </h3>
+            <p>
+              主辦單位其實不會去審核大家的程式碼，只要你認為當週你有針對主題有做到一定程度，就算是半完成品也請大方投稿，不用擔心。
+            </p>
+          </section>
+          <section>
+            <div data-index>Q4</div>
+            <h3>我已經寫到一半了，但時間快來不及，可以先投稿嗎？</h3>
+            <p>可以，有投稿表示你還會持續努力在這次活動上。</p>
+          </section>
+
+          <Tabs.List className={clsx(flex.row_center, "w-full")}>
+            <Tabs.Tab
+              value="ui"
+              className={clsx(flex.row_center, "ml-auto", "text-primary-3")}
+            >
+              <strong className="ch h5">
+                <div>UI 設計師</div>
+                <div>常見問題</div>
+              </strong>
+              <SVG
+                className="w-8"
+                src={require("~/assets/icon/carot-right.svg")}
+              />
+            </Tabs.Tab>
+          </Tabs.List>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="ui" className={panel}>
+          <section>
+            <div data-index>Q1</div>
+            <h3>
+              到時候投稿的平台是提供什麼呢？我也不像是工程師可以有Codepen 上傳
+            </h3>
+            <p>
+              其中投稿的欄位裡面會有一個「線上標示文件」，像是 Adobe XD
+              便有提供該服務(範例連結)，屆時提供標示文件後，便可讓其他前端工程師採用你的設計稿來開發。
+            </p>
+          </section>
+          <section>
+            <div data-index>Q2</div>
+            <h3>
+              投稿上去的 UI 作品，我知道需要授權讓前端工程師組做成 Web
+              介面，那授權部分可以設定嗎？
+            </h3>
+            <p>
+              會有的，屆時平台投稿流程上，會讓您的作品可以選擇 CC0、CC BY
+              等授權，以保障您的 UI 作品權益。
+            </p>
+          </section>
+          <section>
+            <div data-index>Q3</div>
+            <h3>一定要上傳「線上標示文件」嗎？</h3>
+            <p>
+              是的，因為這樣才有辦法讓其他前端工程師，能採用您的設計稿，將您的設計稿實作出網頁格式。如果您是使用
+              Sketch，也可使用 Sketch Measure 編譯出來後，壓縮 ZIP 到雲端空間
+              (Dropbox、Google Drive)。
+            </p>
+          </section>
+          <section>
+            <div data-index>Q4</div>
+            <h3>不能使用 PS、Illustrator 設計嗎？</h3>
+            <p>
+              可以，團隊在協作過程中，一定也會先出些進度提供前端切版，有進度時您也可以先投稿，讓前端工程師可以先接手，之後再透過
+              FB 社團來溝通進度即可。
+            </p>
+          </section>
+
+          <Tabs.List className={clsx(flex.row_center, "w-full")}>
+            <Tabs.Tab
+              value="common"
+              className={clsx(flex.row_center, "text-primary-3")}
+            >
+              <SVG
+                className="w-8"
+                src={require("~/assets/icon/carot-left.svg")}
+              />
+              <strong className="ch h5">
+                <div>常見問題</div>
+              </strong>
+            </Tabs.Tab>
+            <Tabs.Tab
+              value="frontend"
+              className={clsx(flex.row_center, "ml-auto", "text-primary-3")}
+            >
+              <strong className="ch h5">
+                <div>前端工程師</div>
+                <div>常見問題</div>
+              </strong>
+              <SVG
+                className="w-8"
+                src={require("~/assets/icon/carot-right.svg")}
+              />
+            </Tabs.Tab>
+          </Tabs.List>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="frontend" className={panel}>
+          <section>
+            <div data-index>Q1</div>
+            <h3>
+              我可以不依照設計稿，自己做版面嗎？因為我自己想多練習js / 後端
+            </h3>
+            <p>
+              可以，The F2E
+              活動是希望讓大家人人有功練，所以依照你自己想投入的方向練功即可。CSS
+              也可以用框架，例如 Bootstrap。
+            </p>
+          </section>
+          <section>
+            <div data-index>Q2</div>
+            <h3>前端介面一定要長得一模一樣嗎？</h3>
+            <p>不用，依照自己的想法來開發也可以</p>
+          </section>
+          <section>
+            <div data-index>Q3</div>
+            <h3>有現成的網頁靜態頁面嗎？我想只練習 JS / 後端就好</h3>
+            <p>
+              這段我們不會提供，畢竟每個人習慣的 Coding style 又不一樣，產出的
+              HTML、CSS 並非是自己習慣的 Layout 反而會更花時間。
+            </p>
+          </section>
+          <section>
+            <div data-index>Q4</div>
+            <h3>
+              那我只想要練習 JS，HTML / CSS 我用陽春版，不依照設計稿開發可以嗎？
+            </h3>
+            <p>
+              只要您能找到 PS 或 Illustrator
+              產出線上標示文件的方式就可以，因為前端工程師大部分皆比較少具有繪圖軟體，所以用線上標示文件將會減少許工程師協作上的溝通時間。
+            </p>
+          </section>
+          <section>
+            <div data-index>Q5</div>
+            <h3>當每週一題目出來後，我有一些設計進度也可以先投稿嗎？</h3>
+            <p>
+              可以，你可以當做我們就是出一個主題，你依照那主題當作參考方向來開發即可。
+            </p>
+          </section>
+
+          <Tabs.List className={clsx(flex.row_center, "w-full")}>
+            <Tabs.Tab
+              value="ui"
+              className={clsx(flex.row_center, "text-primary-3")}
+            >
+              <SVG
+                className="w-8"
+                src={require("~/assets/icon/carot-left.svg")}
+              />
+              <strong className="ch h5">
+                <div>UI 設計師</div>
+                <div>常見問題</div>
+              </strong>
+            </Tabs.Tab>
+            <Tabs.Tab
+              value="group"
+              className={clsx(flex.row_center, "ml-auto", "text-primary-3")}
+            >
+              <strong className="ch h5">
+                <div>團體組</div>
+                <div>常見問題</div>
+              </strong>
+              <SVG
+                className="w-8"
+                src={require("~/assets/icon/carot-right.svg")}
+              />
+            </Tabs.Tab>
+          </Tabs.List>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="group" className={panel}>
+          <section>
+            <div data-index>Q1</div>
+            <h3>請問團體組最多幾人？</h3>
+            <p>最多 4 人，投稿作品時請派一位組長來投稿即可。</p>
+          </section>
+          <section>
+            <div data-index>Q2</div>
+            <h3>我對獎項有興趣，可以只做第三道主題就好嗎？</h3>
+            <p>
+              可以，您可以在這場活動中，和組員一起打磨第三道主題，不用三個主題都做。
+            </p>
+          </section>
+          <section>
+            <div data-index>Q3</div>
+            <h3>那團體第三道主題最晚投稿期限為？</h3>
+            <p>
+              團體組投稿第三週 UI 最晚投稿時間為 11/21(一) 中午 12
+              點，前端最晚投稿期限為 11/28(一) 中午 12 點。
+            </p>
+          </section>
+          <section>
+            <div data-index>Q4</div>
+            <h3>
+              我們團體組比較想做手機 APP ，可以投稿並符合並符合評審門檻嗎？
+            </h3>
+            <p>
+              您可以開發手機
+              APP，若有在期限前投稿也能獲得數位獎狀。但評審門檻僅限 Web
+              瀏覽器應用開發，Android、iOS APP
+              則不在評審範圍內，故不符合評審門檻。
+            </p>
+          </section>
+          <section>
+            <div data-index>Q5</div>
+            <h3>
+              請問除了前端開發、 UI
+              設計外，還能做其他加值應用嗎？例如後端動態應用整合？
+            </h3>
+            <p>
+              可以的，只要能透過網頁瀏覽器操控您的服務，並有使用到 TDX API
+              的任何一個
+              API，您可以依照本次主題「全台公車動態時刻查詢應用服務」做最大的加值整合應用，甚至搭配後端應用，整合多個外部
+              API 也是可以的。
+            </p>
+          </section>
+          <section>
+            <div data-index>Q6</div>
+            <h3>
+              團體組的 UI 設計稿，可以讓『個人組 - 前端工程師』組別採用嗎？
+            </h3>
+            <p>不能，預設是不能讓『個人組-前端工程師』採用。</p>
+          </section>
+
+          <Tabs.List className={clsx(flex.row_center, "w-full")}>
+            <Tabs.Tab
+              value="frontend"
+              className={clsx(flex.row_center, "text-primary-3")}
+            >
+              <SVG
+                className="w-8"
+                src={require("~/assets/icon/carot-left.svg")}
+              />
+              <strong className="ch h5">
+                <div>前端工程師</div>
+                <div>常見問題</div>
+              </strong>
+            </Tabs.Tab>
+          </Tabs.List>
+        </Tabs.Panel>
+      </Tabs.Root>
+
+      <div>
+        <button className="button yellow ch h5 px-10 py-3 font-bold">
+          立即報名
+        </button>
+      </div>
+    </section>
+  );
+}
+
+function Sponsors() {
+  return (
+    <section
+      className={clsx(
+        section,
+        "!min-h-0",
+        "bg-neutral-3",
+        "text-center",
+        flex.col_center,
+        "gap-8",
+        "mt-20 px-8 py-16"
+      )}
+    >
+      <h2 className="relative">
+        <img
+          className="absolute -right-8 -top-2 w-8"
+          src={require("~/assets/image/decoration/shiny.png")}
+          role="presentation"
+          alt="presentation"
+        />
+        <img
+          className="absolute -left-10 top-6"
+          src={require("~/assets/image/decoration/shiny.png")}
+          role="presentation"
+          alt="presentation"
+        />
+        <div className="en h3 uppercase">Sponsors</div>
+        <div className="ch h4 font-bold">鑽石級贊助商</div>
+      </h2>
+
+      <ul className={clsx(flex.col_center, "gap-4")}>
+        <li>
+          <div>
+            <img
+              src={require("~/assets/sponsor/block-studio-default.png")}
+              alt="block studio"
+            />
+          </div>
+        </li>
+        <li>
+          <div>
+            <img
+              src={require("~/assets/sponsor/kdan-default.png")}
+              alt="kdan"
+            />
+          </div>
+        </li>
+        <li>
+          <div>
+            <img
+              src={require("~/assets/sponsor/titansoft-default.png")}
+              alt="titansoft"
+            />
+          </div>
+        </li>
+      </ul>
     </section>
   );
 }
@@ -729,7 +1121,9 @@ export default function Index() {
       {/* <Section3 /> */}
       {/* <Section4 /> */}
       {/* <Section5 /> */}
-      <Section6 />
+      {/* <Section6 /> */}
+      <Section7 />
+      {/* <Sponsors /> */}
     </main>
   );
 }
