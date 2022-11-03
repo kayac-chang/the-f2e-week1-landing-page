@@ -1,9 +1,7 @@
 import clsx from "clsx";
-import { range } from "ramda";
-import { Fragment } from "react";
 import SVG from "~/components/SVG";
-import { GlitchText, NeonText } from "~/components/RichText";
 import Tabs from "~/components/Tabs";
+import Banner from "~/components/Banner";
 
 const flex = {
   col: "flex flex-col",
@@ -15,87 +13,6 @@ const section = clsx(flex.col, "w-full min-h-screen overflow-hidden");
 const marquee = clsx("gap-6", flex.nowrap);
 const card = clsx(flex.col_center, "gap-4 rounded-3xl");
 const badge = "bg-secondary-1 w-max py-1 px-2 rounded-xl";
-
-function Section1() {
-  return (
-    <section
-      className={clsx(section, "items-center text-center", "pt-56 pb-10")}
-    >
-      {/* fade in / move up / floating */}
-      <img
-        className={clsx(
-          "absolute s-20",
-          "rotate-[-20deg]",
-          "translate-x-[-8rem] translate-y-[-6rem]"
-        )}
-        src={require("~/assets/image/code.png")}
-        role="presentation"
-        alt="presentation"
-      />
-
-      {/* fade in / move up / floating */}
-      <img
-        className={clsx(
-          "absolute s-32",
-          "rotate-[16deg]",
-          "translate-x-[7rem] translate-y-[20rem]"
-        )}
-        src={require("~/assets/image/dashboard.png")}
-        role="presentation"
-        alt="presentation"
-      />
-
-      {/* fade in / move up */}
-      <GlitchText
-        className="h3 block font-pilot-command-italic tracking-[0.2em]"
-        offset={2}
-      >
-        4TH
-      </GlitchText>
-
-      {/* fade in / move up */}
-      <GlitchText
-        className="h2 block font-monument-extended tracking-[0.2em]"
-        offset={3}
-      >
-        THE F2E
-      </GlitchText>
-
-      {/* title */}
-      <h1 className={clsx("ch h5 tracking-[1rem]", "w-max text-center")}>
-        互動式網頁設計
-      </h1>
-
-      {/* register */}
-      <button
-        className={clsx(
-          "mt-16",
-          "solid yellow",
-          "ch h5 font-bold",
-          "tracking-[0.02em]",
-          "w-max px-10 py-3"
-        )}
-      >
-        立即報名
-      </button>
-
-      {/* marquee */}
-      <div className={clsx("mt-auto", marquee)}>
-        {range(0, 3).map((i) => (
-          <Fragment key={i}>
-            <NeonText className="h4 w-max font-monument-extended uppercase">
-              join us
-            </NeonText>
-            <SVG
-              className="w-6"
-              src={require("~/assets/icon/little-star.svg")}
-            />
-          </Fragment>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 function Section2() {
   return (
@@ -351,7 +268,7 @@ function Section4() {
           </div>
 
           <img
-            src={require("~/assets/image/dashboard.png")}
+            src={require("~/assets/image/dashboard-1x.png")}
             role="presentation"
             alt="presentation"
           />
@@ -1116,13 +1033,13 @@ function Sponsors() {
 export default function Index() {
   return (
     <main className="s-full">
-      {/* <Section1 /> */}
+      <Banner />
       {/* <Section2 /> */}
       {/* <Section3 /> */}
       {/* <Section4 /> */}
       {/* <Section5 /> */}
       {/* <Section6 /> */}
-      <Section7 />
+      {/* <Section7 /> */}
       {/* <Sponsors /> */}
     </main>
   );

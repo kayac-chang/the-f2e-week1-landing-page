@@ -2,89 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@custom-selector :--h1 h1, .h1;
-@custom-selector :--h2 h2, .h2;
-@custom-selector :--h3 h3, .h3;
-@custom-selector :--h4 h4, .h4;
-@custom-selector :--h5 h5, .h5;
-
-@layer base {
-  /* EN Heading */
-  :--h1 {
-    @apply text-en-h1;
-  }
-  :--h2 {
-    @apply text-en-h2;
-  }
-  :--h3 {
-    @apply text-en-h3;
-  }
-  :--h4 {
-    @apply text-en-h4;
-  }
-
-  /* CH Heading */
-  .ch {
-    &:--h1 {
-      @apply text-ch-h1;
-    }
-    &:--h2 {
-      @apply text-ch-h2;
-    }
-    &:--h3 {
-      @apply text-ch-h3;
-    }
-    &:--h4 {
-      @apply text-ch-h4;
-    }
-    &:--h5 {
-      @apply text-ch-h5;
-    }
-  }
-}
-
 @layer components {
   /* Font */
   .en {
     @apply font-monument-extended tracking-[0.1em];
-  }
-
-  .ch {
-    @apply font-noto-sans-tc;
-
-    /* CH Heading */
-    &.title {
-      @apply text-ch-title;
-    }
-    &.sub-title {
-      @apply text-ch-sub-title;
-    }
-    /* CH Paragraph */
-    &.p1 {
-      @apply text-ch-p1;
-    }
-    &.p2 {
-      @apply text-ch-p2;
-    }
-    &.p3 {
-      @apply text-ch-p3;
-    }
-    &.p4 {
-      @apply text-ch-p4;
-    }
-    &.caption {
-      @apply text-ch-caption;
-    }
-  }
-
-  /* button */
-  button,
-  .button {
-    @apply rounded-[2rem];
-
-    &.yellow {
-      @apply bg-yellow-1 text-neutral-6;
-    }
   }
 
   /* effect */
@@ -114,30 +35,6 @@
 }
 
 @layer utilities {
-  /* EN Heading */
-  .title {
-    @apply text-en-title;
-  }
-  .sub-title {
-    @apply text-en-sub-title;
-  }
-  /* EN Paragraph */
-  .caption {
-    @apply text-en-caption;
-  }
-  .p1 {
-    @apply text-en-p1;
-  }
-  .p2 {
-    @apply text-en-p2;
-  }
-  .p3 {
-    @apply text-en-p3;
-  }
-  .p4 {
-    @apply text-en-p4;
-  }
-
   /* Gradient */
   .gradient-card-bk {
     @apply from-primary-1 to-primary-3;

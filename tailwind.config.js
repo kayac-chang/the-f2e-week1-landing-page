@@ -11,37 +11,6 @@ module.exports = {
         "monument-extended": ["Monument Extended", "sans-serif"],
         "pilot-command-italic": ["Pilot Command Italic", "sans-serif"],
       },
-      fontSize: {
-        // CH Heading
-        "ch-h1": ["48px", "72px"],
-        "ch-h2": ["40px", "60px"],
-        "ch-h3": ["32px", "48px"],
-        "ch-h4": ["24px", "36px"],
-        "ch-h5": ["20px", "28px"],
-        "ch-title": ["16px", "20px"],
-        "ch-sub-title": ["14px", "18px"],
-
-        // CH Paragraph
-        "ch-p1": ["24px", "36px"],
-        "ch-p2": ["20px", "28px"],
-        "ch-p3": ["16px", "20px"],
-        "ch-p4": ["14px", "18px"],
-        "ch-caption": ["12px", "16px"],
-        // EN Heading
-        "en-h1": ["48px", "72px", "10%"],
-        "en-h2": ["40px", "60px", "10%"],
-        "en-h3": ["32px", "48px", "10%"],
-        "en-h4": ["24px", "36px", "10%"],
-        "en-title": ["16px", "20px", "10%"],
-        "en-sub-title": ["14px", "18px", "10%"],
-
-        // EN Paragraph
-        "en-p1": ["24px", "36px"],
-        "en-p2": ["20px", "28px"],
-        "en-p3": ["16px", "20px"],
-        "en-p4": ["14px", "18px"],
-        "en-caption": ["12px", "16px"],
-      },
       colors: {
         neutral: {
           1: "#FFFFFF",
