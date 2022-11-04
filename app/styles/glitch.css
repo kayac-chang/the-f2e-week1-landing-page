@@ -1,0 +1,48 @@
+[data-glitch] {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+[data-glitch] span {
+  grid-row-start: 1;
+  grid-column-start: 1;
+
+  --stack-height: calc(100% / var(--stacks) - 1px);
+  --inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
+  --clip-top: calc(var(--stack-height) * var(--index));
+  --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
+
+  clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
+  animation: glitch 2s ease infinite alternate-reverse;
+}
+
+[data-glitch-1] {
+  --index: 0;
+  text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+}
+
+[data-glitch-2] {
+  --index: 1;
+  --glitch-translate: 8px;
+}
+[data-glitch-3] {
+  --index: 2;
+  --glitch-translate: -8px;
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+    transform: translate(var(--glitch-translate));
+  }
+  2% {
+    text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+  }
+  4%,
+  100% {
+    text-shadow: none;
+    transform: none;
+  }
+}

@@ -1,10 +1,14 @@
 import clsx from "clsx";
 import { last, map, multiply, range } from "ramda";
-import { ComponentProps, Fragment } from "react";
+import { Fragment } from "react";
+import { AnimationControls, motion } from "framer-motion";
 import { GlitchText, NeonText } from "~/components/RichText";
 import SVG from "~/components/SVG";
 import { button, flex, section } from "~/styles/common";
-import { getSrcSet } from "~/utils/image";
+import { transform } from "~/utils/css";
+import { useAnimationSeq } from "~/utils/animation";
+import type { ComponentProps } from "react";
+import type { Vec2 } from "~/utils/css";
 
 type DecorationProps = ComponentProps<"div">;
 
@@ -31,12 +35,12 @@ function DecorationPacMan(props: DecorationProps) {
       const unit = index - offset;
       return [unit, offset];
     })
-    .map(map(multiply(spacing)));
+    .map(map(multiply(spacing))) as Vec2[];
 
   const last_positions = (() => {
     const [x, y] = last(positions)!;
 
-    return [x + spacing, y];
+    return [x + spacing, y] as Vec2;
   })();
 
   return (
@@ -45,7 +49,7 @@ function DecorationPacMan(props: DecorationProps) {
         <div
           className="absolute"
           style={{
-            transform: `translate(${-1 * spacing}rem, ${0}rem)`,
+            ...transform([-1 * spacing, 0]),
           }}
         >
           <img
@@ -56,15 +60,15 @@ function DecorationPacMan(props: DecorationProps) {
           />
         </div>
 
-        {positions.map(([x, y]) => (
+        {positions.map((position) => (
           <img
-            key={JSON.stringify([x, y])}
+            key={JSON.stringify(position)}
             src={require("~/assets/image/decoration/ball-white.png")}
             role="presentation"
             alt="presentation"
             className="absolute w-[0.2rem] lg:w-1"
             style={{
-              transform: `translate(${x}rem, ${y}rem)`,
+              ...transform(position),
             }}
           />
         ))}
@@ -72,7 +76,7 @@ function DecorationPacMan(props: DecorationProps) {
         <div
           className="absolute"
           style={{
-            transform: `translate(${last_positions[0]}rem, ${last_positions[1]}rem)`,
+            ...transform(last_positions),
           }}
         >
           <img
@@ -110,26 +114,26 @@ function DecorationArrow(props: DecorationProps) {
       const unit = index - offset;
       return [unit, offset];
     })
-    .map(map(multiply(spacing)));
+    .map(map(multiply(spacing))) as Vec2[];
 
   const last_positions = (() => {
     const [x, y] = last(positions)!;
 
-    return [x + spacing, y];
+    return [x + spacing, y] as Vec2;
   })();
 
   return (
     <div {...props}>
       <div className="relative s-10">
-        {positions.map(([x, y]) => (
+        {positions.map((position) => (
           <img
-            key={JSON.stringify([x, y])}
+            key={JSON.stringify(position)}
             src={require("~/assets/image/decoration/ball-white.png")}
             role="presentation"
             alt="presentation"
             className="absolute w-1"
             style={{
-              transform: `translate(${x}rem, ${y}rem)`,
+              ...transform(position),
             }}
           />
         ))}
@@ -137,7 +141,7 @@ function DecorationArrow(props: DecorationProps) {
         <div
           className="absolute"
           style={{
-            transform: `translate(${last_positions[0]}rem, ${last_positions[1]}rem)`,
+            ...transform(last_positions),
           }}
         >
           <img
@@ -152,6 +156,32 @@ function DecorationArrow(props: DecorationProps) {
   );
 }
 
+function fadein(animation: AnimationControls) {
+  return animation.start({
+    y: [50, 0],
+    opacity: [0, 1],
+    transition: {
+      ease: "circOut",
+      duration: 1,
+    },
+  });
+}
+
+function floating(animation: AnimationControls) {
+  return animation.start({
+    y: [0, 25],
+    transition: {
+      type: "spring",
+      mass: 1,
+      damping: 120,
+      stiffness: 280,
+      duration: 6,
+      repeatType: "mirror",
+      repeat: Infinity,
+    },
+  });
+}
+
 function Banner() {
   return (
     <section
@@ -164,52 +194,55 @@ function Banner() {
       )}
     >
       <div className="relative">
-        {/* code: fade in / move up / floating */}
-        <img
+        {/* code */}
+        <div
           className={clsx(
             "absolute",
-            "s-20 lg:s-28 xl:s-40",
-            "rotate-[-20deg]",
             "top-[-8rem]",
             "md:top-[2rem] md:left-[-11rem]",
             "lg:left-[-10rem]",
             "xl:left-[-14rem]",
             "2xl:left-[-10rem] 2xl:top-[5rem]"
           )}
-          src={require("~/assets/image/code.png")}
-          role="presentation"
-          alt="presentation"
-        />
+        >
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={useAnimationSeq(fadein, floating)}
+          >
+            <img
+              className="s-20 lg:s-28 xl:s-40"
+              src={require("~/assets/image/code.png")}
+              role="presentation"
+              alt="presentation"
+            />
+          </motion.div>
+        </div>
 
-        {/* dashboard: fade in / move up / floating */}
-        <img
+        {/* dashboard */}
+        <div
           className={clsx(
             "absolute",
-            "2xl:s-68 s-32 md:s-48 lg:s-56 xl:s-64",
             "-bottom-[20rem] right-0",
             "md:bottom-[-12rem] md:right-[-8rem]",
             "lg:bottom-[-13rem] lg:right-[-10rem]",
             "xl:bottom-[-15rem] xl:right-[-12rem]",
             "2xl:bottom-[-18rem] 2xl:right-[-8rem]"
           )}
-          role="presentation"
-          alt="presentation"
-          srcSet={getSrcSet([
-            {
-              src: require("~/assets/image/dashboard-2x.png"),
-              width: `623w`,
-            },
-            {
-              src: require("~/assets/image/dashboard-1x.png"),
-              width: `312w`,
-            },
-            {
-              src: require("~/assets/image/dashboard-0.5x.png"),
-              width: `131w`,
-            },
-          ])}
-        />
+        >
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={useAnimationSeq(fadein, floating)}
+          >
+            <img
+              className="2xl:s-68 s-32 md:s-48 lg:s-56 xl:s-64"
+              role="presentation"
+              alt="presentation"
+              src={require("~/assets/image/dashboard-2x.png")}
+            />
+          </motion.div>
+        </div>
 
+        {/* arrow */}
         <DecorationArrow
           className={clsx(
             "absolute hidden md:block",
@@ -220,6 +253,7 @@ function Banner() {
           )}
         />
 
+        {/* pac-man */}
         <DecorationPacMan
           className={clsx(
             "absolute hidden md:block",
@@ -230,33 +264,45 @@ function Banner() {
           )}
         />
 
-        {/* fade in / move up */}
-        <GlitchText
+        {/* 4th */}
+        <div
           className={clsx(
-            "block",
-            "font-pilot-command-italic tracking-[0.2em]",
-            "text-3xl lg:text-4xl xl:text-5xl",
             "absolute -top-1/2",
             "right-1/2 translate-x-1/2",
             "md:right-0 md:translate-x-full"
           )}
-          offset={2}
         >
-          4TH
-        </GlitchText>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={useAnimationSeq(fadein)}
+          >
+            <GlitchText
+              className={clsx(
+                "block",
+                "font-pilot-command-italic tracking-[0.2em]",
+                "text-3xl lg:text-4xl xl:text-5xl"
+              )}
+              offset={2}
+            >
+              4TH
+            </GlitchText>
+          </motion.div>
+        </div>
 
-        {/* fade in / move up */}
-        <GlitchText
-          className={clsx(
-            "mt-4",
-            "block",
-            "font-monument-extended tracking-[0.2em]",
-            "text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl"
-          )}
-          offset={3}
-        >
-          THE F2E
-        </GlitchText>
+        {/* the f2e */}
+        <motion.div initial={{ opacity: 0 }} animate={useAnimationSeq(fadein)}>
+          <GlitchText
+            className={clsx(
+              "mt-4",
+              "block",
+              "font-monument-extended tracking-[0.2em]",
+              "text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl"
+            )}
+            offset={3}
+          >
+            THE F2E
+          </GlitchText>
+        </motion.div>
       </div>
 
       {/* title */}
@@ -290,19 +336,30 @@ function Banner() {
       </button>
 
       {/* marquee */}
-      <div className={clsx("mt-auto", flex.nowrap, "gap-6")}>
-        {range(0, 20).map((i) => (
+      <motion.div
+        animate={{
+          x: ["25%", "-25%"],
+        }}
+        transition={{
+          ease: "linear",
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 20,
+        }}
+        className={clsx(flex.nowrap, "mt-auto", "gap-6")}
+      >
+        {range(0, 40).map((i) => (
           <Fragment key={i}>
             <NeonText className="h4 w-max font-monument-extended uppercase">
               join us
             </NeonText>
             <SVG
-              className="w-6"
+              className="mb-1 w-6"
               src={require("~/assets/icon/little-star.svg")}
             />
           </Fragment>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -1,5 +1,7 @@
 import clsx from "clsx";
+import { path } from "ramda";
 import type { ComponentProps, CSSProperties } from "react";
+import { config } from "~/styles/common";
 
 type GlitchTextProps = ComponentProps<"div"> & {
   offset: number;
@@ -7,31 +9,52 @@ type GlitchTextProps = ComponentProps<"div"> & {
 export function GlitchText({ className, children, offset }: GlitchTextProps) {
   return (
     <span className={className}>
-      <span
-        aria-hidden
-        className="absolute -translate-x-0 text-secondary-1"
-        style={
-          {
-            "--tw-translate-x": -1 * offset + "px",
-            "--tw-translate-y": -1 * offset + "px",
-          } as CSSProperties
-        }
-      >
-        {children}
+      <span className="relative">
+        <span
+          aria-hidden
+          className="absolute -left-full translate-x-0 text-secondary-1"
+          style={
+            {
+              "--tw-translate-x": -offset + "px",
+              "--tw-translate-y": -offset + "px",
+            } as CSSProperties
+          }
+        >
+          {children}
+        </span>
+        <span
+          aria-hidden
+          className="absolute -left-full translate-x-0  text-primary-1"
+          style={
+            {
+              "--tw-translate-x": offset + "px",
+              "--tw-translate-y": offset + "px",
+            } as CSSProperties
+          }
+        >
+          {children}
+        </span>
+
+        <span
+          style={
+            {
+              "--stacks": 3,
+              "--color-1": path(["white"])(config.theme?.colors),
+              "--color-2": path(["secondary", "1"])(config.theme?.colors),
+              "--color-3": path(["primary", "1"])(config.theme?.colors),
+            } as CSSProperties
+          }
+          data-glitch
+        >
+          <span aria-hidden data-glitch-3>
+            {children}
+          </span>
+          <span aria-hidden data-glitch-2>
+            {children}
+          </span>
+          <span data-glitch-1>{children}</span>
+        </span>
       </span>
-      <span
-        aria-hidden
-        className="absolute translate-x-0  text-primary-1"
-        style={
-          {
-            "--tw-translate-x": offset + "px",
-            "--tw-translate-y": offset + "px",
-          } as CSSProperties
-        }
-      >
-        {children}
-      </span>
-      <span className="relative">{children}</span>
     </span>
   );
 }
@@ -42,7 +65,7 @@ export function NeonText({ className, children }: NeonTextProps) {
     <span
       className={clsx(
         className,
-        "text-clip bg-gradient-to-b gradient-decoration text-neutral-5"
+        "gradient-decoration text-clip bg-gradient-to-b text-neutral-5"
       )}
     >
       {children}
