@@ -25,11 +25,11 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "http://fonts.cdnfonts.com/css/monument-extended",
+    href: "https://fonts.cdnfonts.com/css/monument-extended",
   },
   {
     rel: "stylesheet",
-    href: "http://fonts.cdnfonts.com/css/pilot-command",
+    href: "https://fonts.cdnfonts.com/css/pilot-command",
   },
 ];
 
