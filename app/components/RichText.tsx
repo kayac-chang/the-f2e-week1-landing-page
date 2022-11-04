@@ -1,7 +1,5 @@
 import clsx from "clsx";
-import { path } from "ramda";
 import type { ComponentProps, CSSProperties } from "react";
-import { config } from "~/styles/common";
 
 type GlitchTextProps = ComponentProps<"div"> & {
   offset: number;
@@ -39,9 +37,6 @@ export function GlitchText({ className, children, offset }: GlitchTextProps) {
           style={
             {
               "--stacks": 3,
-              "--color-1": path(["white"])(config.theme?.colors),
-              "--color-2": path(["secondary", "1"])(config.theme?.colors),
-              "--color-3": path(["primary", "1"])(config.theme?.colors),
             } as CSSProperties
           }
           data-glitch

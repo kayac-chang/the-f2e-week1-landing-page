@@ -1,8 +1,4 @@
 import clsx from "clsx";
-import tailwindConfig from "tailwind.config";
-import resolve from "tailwindcss/resolveConfig";
-
-export const config = resolve(tailwindConfig);
 
 export const flex = {
   col: "flex flex-col",
