@@ -9,6 +9,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import Header from "~/components/Header";
+import Footer from "~/components/Footer";
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
 
 export const links: LinksFunction = () => [
@@ -43,19 +44,9 @@ export async function loader() {
   return json({});
 }
 
-function Footer() {
-  return (
-    <footer className="flex p-4">
-      <small className="mx-auto text-center font-montserrat">
-        Copyright © 2022 HexSchool.All rights reserved.
-      </small>
-    </footer>
-  );
-}
-
 export default function App() {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en">
       <head>
         <Meta />
         <Links />

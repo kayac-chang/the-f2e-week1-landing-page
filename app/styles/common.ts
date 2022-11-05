@@ -12,7 +12,6 @@ export const flex = {
 };
 export const section = clsx(flex.col, "w-full h-full overflow-hidden");
 
-export const marquee = clsx("gap-6", flex.nowrap);
 export const card = clsx(flex.col_center, "gap-4 rounded-3xl");
 export const badge = "bg-secondary-1 w-max py-1 px-2 rounded-xl";
 export const button = {

@@ -7,10 +7,10 @@ type GlitchTextProps = ComponentProps<"div"> & {
 export function GlitchText({ className, children, offset }: GlitchTextProps) {
   return (
     <span className={className}>
-      <span className="relative">
+      <span className="relative flex">
         <span
           aria-hidden
-          className="absolute -left-full translate-x-0 text-secondary-1"
+          className="absolute translate-x-0 text-secondary-1"
           style={
             {
               "--tw-translate-x": -offset + "px",
@@ -22,7 +22,7 @@ export function GlitchText({ className, children, offset }: GlitchTextProps) {
         </span>
         <span
           aria-hidden
-          className="absolute -left-full translate-x-0  text-primary-1"
+          className="absolute translate-x-0 text-primary-1"
           style={
             {
               "--tw-translate-x": offset + "px",

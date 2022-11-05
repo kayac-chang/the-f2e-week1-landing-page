@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { last, map, multiply, range } from "ramda";
 import { Fragment } from "react";
-import type { AnimationControls} from "framer-motion";
+import type { AnimationControls } from "framer-motion";
 import { motion } from "framer-motion";
 import { GlitchText, NeonText } from "~/components/RichText";
 import SVG from "~/components/SVG";

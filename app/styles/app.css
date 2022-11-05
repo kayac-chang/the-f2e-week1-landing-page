@@ -5,11 +5,6 @@
 @import "./glitch.css";
 
 @layer components {
-  /* Font */
-  .en {
-    @apply font-monument-extended tracking-[0.1em];
-  }
-
   /* effect */
   .glassy {
     $border: 2px;
@@ -55,19 +50,6 @@
   /* Shadow */
   .shadow {
     box-shadow: 0px 0px 10px var(--tw-shadow-color);
-
-    &.white {
-      --tw-shadow-color: rgba(255, 255, 255, 0.6);
-    }
-    &.green {
-      --tw-shadow-color: rgba(85, 255, 173, 0.6);
-    }
-    &.purple {
-      --tw-shadow-color: rgba(157, 164, 255, 0.6);
-    }
-    &.yellow {
-      --tw-shadow-color: rgba(255, 243, 133, 0.6);
-    }
   }
   .text-shadow {
     text-shadow: 0px 0px 6px var(--tw-shadow-color);

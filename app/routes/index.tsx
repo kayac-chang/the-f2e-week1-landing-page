@@ -3,25 +3,20 @@ import SVG from "~/components/SVG";
 import Tabs from "~/components/Tabs";
 import Banner from "~/components/Banner";
 import Issue from "~/components/Issue";
-import { section } from "~/styles/common";
+import { badge, card, flex, section } from "~/styles/common";
 import type { MotionProps, Variants } from "framer-motion";
 import { AnimatePresence, motion } from "framer-motion";
-import type { ComponentPropsWithoutRef, WheelEvent } from "react";
+import {
+  ComponentPropsWithoutRef,
+  PointerEvent,
+  useMemo,
+  WheelEvent,
+} from "react";
 import { useCallback } from "react";
 import { cond, pipe } from "ramda";
 import { isNegative, isPositive } from "ramda-adjunct";
 import debounce from "~/utils/debounce";
 import useCounter from "~/hooks/useCounter";
-
-const flex = {
-  col: "flex flex-col",
-  col_center: "flex flex-col items-center",
-  row_center: "flex flex-row items-center",
-  nowrap: "flex flex-nowrap items-center [&>*]:whitespace-nowrap",
-};
-const marquee = clsx("gap-6", flex.nowrap);
-const card = clsx(flex.col_center, "gap-4 rounded-3xl");
-const badge = "bg-secondary-1 w-max py-1 px-2 rounded-xl";
 
 function Section3() {
   return (
@@ -41,7 +36,8 @@ function Section3() {
         <div
           className={clsx(
             "gradient-decoration bg-gradient-to-r py-2 px-2",
-            marquee
+            flex.nowrap,
+            "gap-6"
           )}
         >
           <span className="p2 whitespace-nowrap font-monument-extended uppercase tracking-[0.1em]">
@@ -970,15 +966,37 @@ export default function Index() {
     ),
     [setPage]
   );
+
+  const onPointer = useMemo(() => {
+    let start = 0;
+
+    function onPointerDown(event: PointerEvent) {
+      start = event.pageY;
+    }
+
+    function onPointerUp(event: PointerEvent) {
+      const delta = -Math.sign(event.pageY - start);
+
+      cond([
+        [isPositive, setPage.inc],
+        [isNegative, setPage.dec],
+      ])(delta);
+    }
+
+    return { onPointerUp, onPointerDown };
+  }, [setPage]);
+
+  const handler = { onWheel, ...onPointer };
+
   return (
-    <main className="w-full flex-1 overflow-clip">
-      <Page show={page === 0} onWheel={onWheel}>
+    <main className="flex-1 overflow-clip" {...handler}>
+      <Page show={page === 0}>
         <Banner />
       </Page>
-      <Page show={page === 1} onWheel={onWheel}>
+      <Page show={page === 1}>
         <Issue />
       </Page>
-      <Page show={page === 2} onWheel={onWheel}>
+      <Page show={page === 2}>
         <Section3 />
       </Page>
 
