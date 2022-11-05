@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         "noto-sans-tc": ["Noto Sans TC", "sans-serif"],
-        montserrat: ["Montserrat", "sans-serif"],
+        montserrat: ["Montserrat", "Verdana", "sans-serif"],
         "monument-extended": ["Monument Extended", "sans-serif"],
         "pilot-command-italic": ["Pilot Command Italic", "sans-serif"],
       },
