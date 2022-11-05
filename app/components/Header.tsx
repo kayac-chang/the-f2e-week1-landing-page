@@ -1,28 +1,32 @@
 import SVG from "~/components/SVG";
-import { RemoveScroll } from "react-remove-scroll";
-import { useCallback, useState } from "react";
-import { not } from "ramda";
-import { button, tab as _tab } from "~/styles/common";
 import clsx from "clsx";
+import { button, flex, tab as _tab, theme } from "~/styles/common";
+import { useToggle } from "~/hooks/useToggle";
 
+/* === Styles === */
 const tab = clsx(_tab, "py-4");
 
-function useToggle() {
-  const [flag, setFlag] = useState(false);
+/* === Data === */
+const links = Object.freeze({
+  news: "https://2022.thef2e.com/news",
+  resources: "https://hexschool.tw/OsAcp",
+  jobs: "https://2022.thef2e.com/jobs",
+  register: "https://2022.thef2e.com/signup",
+});
 
-  const toggle = useCallback(() => setFlag(not), [setFlag]);
-
-  return [flag, toggle] as const;
-}
-
+/* === Components === */
 function Header() {
   const [isMenuOpen, toggleMenu] = useToggle();
   return (
-    <header className="ch fixed top-0 left-0 z-10 w-full bg-neutral-5">
+    <header className="ch related z-10 w-full">
       {/* sm */}
-      <div className="flex items-center px-4 py-5 lg:hidden">
-        {/* menu */}
-        <button aria-label="open menu" type="button" onClick={toggleMenu}>
+      <div className={clsx("px-4 py-5 lg:hidden", flex.row_center, theme.main)}>
+        {/* menu trigger */}
+        <button
+          type="button"
+          aria-label={isMenuOpen ? "close menu" : "open menu"}
+          onClick={toggleMenu}
+        >
           <SVG className="s-8" src={require("~/assets/icon/menu.svg")} />
         </button>
 
@@ -44,38 +48,59 @@ function Header() {
       </div>
 
       {isMenuOpen && (
-        <RemoveScroll>
-          <div className="fixed inset-0 -z-10 bg-black/25" />
-          <nav className="h-full w-full px-4">
+        <>
+          {/* backdrop */}
+          <div
+            className="fixed inset-0 -z-10 bg-black/25"
+            onClick={toggleMenu}
+          />
+
+          {/* menu */}
+          <nav className={clsx("absolute left-0 w-full px-4", theme.main)}>
+            {/* close button */}
             <div className="flex py-2">
-              <button className="ml-auto" onClick={toggleMenu}>
+              <button
+                type="button"
+                aria-label="close menu"
+                className="ml-auto"
+                onClick={toggleMenu}
+              >
                 <SVG className="w-8" src={require("~/assets/icon/close.svg")} />
               </button>
             </div>
+
+            {/* nav links */}
             <ul className="flex flex-col gap-8 pb-8 text-center">
               <li>
-                <a className="text-neutral-2" href="/">
+                <a className={tab} href={links.news}>
                   關卡資訊
                 </a>
               </li>
               <li>
-                <a className="text-neutral-2" href="/">
+                <a className={tab} href={links.resources}>
                   攻略資源
                 </a>
               </li>
               <li>
-                <a className="text-neutral-2" href="/">
+                <a className={tab} href={links.jobs}>
                   求職專區
                 </a>
               </li>
               <li>
-                <a href="/" className="button block border py-2 text-center">
+                <a
+                  className={clsx(
+                    button.outline,
+                    "block text-center",
+                    "py-2 px-6"
+                  )}
+                  href={links.register}
+                >
                   登入
                 </a>
               </li>
             </ul>
           </nav>
-        </RemoveScroll>
+        </>
       )}
 
       {/* lg */}
@@ -85,35 +110,32 @@ function Header() {
           <img alt="THE F2E LOGO" src={require("~/assets/image/logo-1x.png")} />
         </div>
 
+        {/* nav links */}
         <nav className="ml-auto">
           <ul className="flex items-center gap-8">
             <li>
-              <a
-                className={tab}
-                aria-current="page"
-                href="https://2022.thef2e.com/news"
-              >
+              <a className={tab} href={links.news}>
                 關卡資訊
               </a>
             </li>
             <li>
-              <a className={tab} href="https://hexschool.tw/OsAcp">
+              <a className={tab} href={links.resources}>
                 攻略資源
               </a>
             </li>
             <li>
-              <a className={tab} href="https://2022.thef2e.com/jobs">
+              <a className={tab} href={links.jobs}>
                 求職專區
               </a>
             </li>
             <li>
               <a
-                href="/"
                 className={clsx(
                   button.outline,
                   "block text-center",
                   "py-2 px-6"
                 )}
+                href={links.register}
               >
                 登入
               </a>

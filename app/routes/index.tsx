@@ -2,6 +2,16 @@ import clsx from "clsx";
 import SVG from "~/components/SVG";
 import Tabs from "~/components/Tabs";
 import Banner from "~/components/Banner";
+import Issue from "~/components/Issue";
+import { section } from "~/styles/common";
+import type { MotionProps, Variants } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import type { ComponentPropsWithoutRef, WheelEvent } from "react";
+import { useCallback } from "react";
+import { cond, pipe } from "ramda";
+import { isNegative, isPositive } from "ramda-adjunct";
+import debounce from "~/utils/debounce";
+import useCounter from "~/hooks/useCounter";
 
 const flex = {
   col: "flex flex-col",
@@ -9,116 +19,9 @@ const flex = {
   row_center: "flex flex-row items-center",
   nowrap: "flex flex-nowrap items-center [&>*]:whitespace-nowrap",
 };
-const section = clsx(flex.col, "w-full min-h-screen overflow-hidden");
 const marquee = clsx("gap-6", flex.nowrap);
 const card = clsx(flex.col_center, "gap-4 rounded-3xl");
 const badge = "bg-secondary-1 w-max py-1 px-2 rounded-xl";
-
-function Section2() {
-  return (
-    <section className={clsx(section, "py-24 px-6")}>
-      <h2 className="sr-only">questions</h2>
-
-      <div className="relative flex-1">
-        <img
-          className="absolute bottom-32 left-14 w-28"
-          src={require("~/assets/image/dialog/dialog-1.png")}
-          role="presentation"
-          alt="presentation"
-        />
-
-        <SVG
-          className="absolute bottom-36 right-32 w-6"
-          src={require("~/assets/icon/star.svg")}
-        />
-
-        <img
-          className="absolute bottom-32 right-10 w-16"
-          src={require("~/assets/image/dialog/dialog-2.png")}
-          role="presentation"
-          alt="presentation"
-        />
-
-        <div className="absolute bottom-0">
-          <div className="relative flex w-max justify-center">
-            <img
-              className="w-72"
-              src={require("~/assets/image/dialog/dialog-purple.png")}
-              role="presentation"
-              alt="presentation"
-            />
-            <span className="ch h5 absolute top-7 rotate-[-4deg] text-neutral-5">
-              羨慕別人的酷酷網頁動畫？
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div className="relative flex-1">
-        <SVG
-          className="absolute top-20 left-16 w-4"
-          src={require("~/assets/icon/circle.svg")}
-        />
-
-        <img
-          className="absolute bottom-4 w-24"
-          src={require("~/assets/image/dialog/dialog-3.png")}
-          role="presentation"
-          alt="presentation"
-        />
-
-        <SVG
-          className="absolute bottom-8 right-8 w-12"
-          src={require("~/assets/icon/triangle.svg")}
-        />
-
-        <div className="absolute right-0 top-10">
-          <div className="relative flex w-max rotate-6 justify-center">
-            <img
-              className="w-64"
-              src={require("~/assets/image/dialog/dialog-green.png")}
-              role="presentation"
-              alt="presentation"
-            />
-            <span className="ch h5 absolute top-12 rotate-[-12deg] text-neutral-5">
-              滿足不了同事的許願？
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div className="relative flex-1">
-        <img
-          className="absolute right-2 bottom-6 w-20"
-          src={require("~/assets/image/dialog/dialog-4.png")}
-          role="presentation"
-          alt="presentation"
-        />
-
-        <img
-          className="absolute left-28 w-32"
-          src={require("~/assets/image/dialog/dialog-5.png")}
-          role="presentation"
-          alt="presentation"
-        />
-
-        <div className="absolute top-16">
-          <div className="relative flex w-max -rotate-6 justify-center">
-            <img
-              className="w-72"
-              src={require("~/assets/image/dialog/dialog-purple.png")}
-              role="presentation"
-              alt="presentation"
-            />
-            <span className="ch h5 absolute top-7 rotate-[-2deg] text-neutral-5">
-              動畫技能樹太雜無從下手？
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function Section3() {
   return (
@@ -1030,12 +933,55 @@ function Sponsors() {
   );
 }
 
-export default function Index() {
+const getWheelDirection = (event: WheelEvent) => Math.sign(event.deltaY);
+
+const variants: Variants = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  exit: { opacity: 0, y: -30, transition: { duration: 0.5 } },
+};
+
+type PageProps = MotionProps &
+  ComponentPropsWithoutRef<"div"> & {
+    show?: boolean;
+  };
+function Page({ show, ...props }: PageProps) {
   return (
-    <main className="s-full">
-      <Banner />
-      {/* <Section2 /> */}
-      {/* <Section3 /> */}
+    <AnimatePresence>
+      {show && (
+        <motion.div layout className="h-full" {...variants} {...props} />
+      )}
+    </AnimatePresence>
+  );
+}
+
+export default function Index() {
+  const [page, setPage] = useCounter(0, 2);
+
+  const onWheel = useCallback(
+    debounce.byLeadFrame(
+      pipe(
+        getWheelDirection,
+        cond([
+          [isPositive, setPage.inc],
+          [isNegative, setPage.dec],
+        ])
+      )
+    ),
+    [setPage]
+  );
+  return (
+    <main className="w-full flex-1 overflow-clip">
+      <Page show={page === 0} onWheel={onWheel}>
+        <Banner />
+      </Page>
+      <Page show={page === 1} onWheel={onWheel}>
+        <Issue />
+      </Page>
+      <Page show={page === 2} onWheel={onWheel}>
+        <Section3 />
+      </Page>
+
       {/* <Section4 /> */}
       {/* <Section5 /> */}
       {/* <Section6 /> */}

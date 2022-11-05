@@ -1,5 +1,6 @@
+import type {
+  AnimationControls} from "framer-motion";
 import {
-  AnimationControls,
   useAnimation,
   useIsomorphicLayoutEffect,
 } from "framer-motion";

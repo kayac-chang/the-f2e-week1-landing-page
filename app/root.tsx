@@ -55,12 +55,12 @@ function Footer() {
 
 export default function App() {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <head>
         <Meta />
         <Links />
       </head>
-      <body className="max-h-screen bg-neutral-5 text-white">
+      <body className="flex h-screen flex-col overflow-hidden bg-neutral-5 text-white">
         <Header />
         <Outlet />
         <Footer />

@@ -1,7 +1,8 @@
-import {
+import type {
   ComponentProps,
+  MouseEvent} from "react";
+import {
   isValidElement,
-  MouseEvent,
   useContext,
   useEffect,
   useRef,

@@ -1,7 +1,8 @@
 import clsx from "clsx";
 import { last, map, multiply, range } from "ramda";
 import { Fragment } from "react";
-import { AnimationControls, motion } from "framer-motion";
+import type { AnimationControls} from "framer-motion";
+import { motion } from "framer-motion";
 import { GlitchText, NeonText } from "~/components/RichText";
 import SVG from "~/components/SVG";
 import { button, flex, section } from "~/styles/common";
@@ -46,6 +47,7 @@ function DecorationPacMan(props: DecorationProps) {
   return (
     <div {...props}>
       <div className="relative s-10">
+        {/* purple ball */}
         <div
           className="absolute"
           style={{
@@ -60,6 +62,7 @@ function DecorationPacMan(props: DecorationProps) {
           />
         </div>
 
+        {/* white ball */}
         {positions.map((position) => (
           <img
             key={JSON.stringify(position)}
@@ -73,6 +76,7 @@ function DecorationPacMan(props: DecorationProps) {
           />
         ))}
 
+        {/* pac-man */}
         <div
           className="absolute"
           style={{
@@ -125,6 +129,7 @@ function DecorationArrow(props: DecorationProps) {
   return (
     <div {...props}>
       <div className="relative s-10">
+        {/* white ball */}
         {positions.map((position) => (
           <img
             key={JSON.stringify(position)}
@@ -138,6 +143,7 @@ function DecorationArrow(props: DecorationProps) {
           />
         ))}
 
+        {/* arrow */}
         <div
           className="absolute"
           style={{
@@ -182,15 +188,16 @@ function floating(animation: AnimationControls) {
   });
 }
 
-function Banner() {
+function Banner(props: ComponentProps<"section">) {
   return (
     <section
+      {...props}
       className={clsx(
+        props.className,
         section,
-        "items-center text-center",
-        "pt-56 pb-10",
-        "sm:pt-80",
-        "md:pt-80"
+        "pt-40",
+        "sm:pt-60",
+        "items-center text-center"
       )}
     >
       <div className="relative">
@@ -319,7 +326,17 @@ function Banner() {
       </h1>
 
       {/* register */}
-      <button
+      <motion.button
+        whileHover={{
+          scale: 1.2,
+          filter: `brightness(1.5)`,
+          boxShadow: `0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)`,
+        }}
+        whileTap={{
+          scale: 0.9,
+          filter: `brightness(1.5)`,
+          boxShadow: `0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)`,
+        }}
         className={clsx(
           button.yellow,
           "font-noto-sans-tc",
@@ -333,7 +350,7 @@ function Banner() {
         )}
       >
         立即報名
-      </button>
+      </motion.button>
 
       {/* marquee */}
       <motion.div
