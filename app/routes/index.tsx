@@ -933,7 +933,15 @@ const getWheelDirection = (event: WheelEvent) => Math.sign(event.deltaY);
 
 const variants: Variants = {
   initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      delayChildren: 0.8,
+      staggerChildren: 0.8,
+    },
+  },
   exit: { opacity: 0, y: -30, transition: { duration: 0.5 } },
 };
 
@@ -945,7 +953,15 @@ function Page({ show, ...props }: PageProps) {
   return (
     <AnimatePresence>
       {show && (
-        <motion.div layout className="h-full" {...variants} {...props} />
+        <motion.div
+          layout
+          className="h-full"
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={variants}
+          {...props}
+        />
       )}
     </AnimatePresence>
   );

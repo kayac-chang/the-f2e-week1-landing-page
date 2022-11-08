@@ -1,6 +1,24 @@
 import clsx from "clsx";
 import SVG from "~/components/SVG";
 import { section } from "~/styles/common";
+import { motion, Variants } from "framer-motion";
+import { easeOutElastic } from "~/utils/ease";
+
+const variants: Variants = {
+  initial: {
+    opacity: 0,
+    scale: 0,
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      // delay: 0.5,
+      ease: easeOutElastic,
+      duration: 0.8,
+    },
+  },
+};
 
 function Issue() {
   return (
@@ -15,7 +33,8 @@ function Issue() {
       <h2 className="sr-only">issue</h2>
 
       {/* issue 1 */}
-      <div
+      <motion.div
+        variants={variants}
         className={clsx(
           "relative",
           "flex flex-1 flex-col justify-center",
@@ -75,7 +94,8 @@ function Issue() {
           )}
         >
           <img
-            src={require("~/assets/image/dialog/dialog-purple.png")}
+            className="shadow-primary-1 drop-shadow"
+            src={require("~/assets/icon/dialog-1.svg")}
             role="presentation"
             alt="presentation"
           />
@@ -91,10 +111,11 @@ function Issue() {
             羨慕別人的酷酷網頁動畫？
           </span>
         </div>
-      </div>
+      </motion.div>
 
       {/* issue 2 */}
-      <div
+      <motion.div
+        variants={variants}
         className={clsx(
           "relative",
           "flex flex-1 flex-col justify-center",
@@ -155,7 +176,8 @@ function Issue() {
           )}
         >
           <img
-            src={require("~/assets/image/dialog/dialog-green.png")}
+            className="shadow-secondary-1 drop-shadow"
+            src={require("~/assets/icon/dialog-2.svg")}
             role="presentation"
             alt="presentation"
           />
@@ -170,10 +192,11 @@ function Issue() {
             滿足不了同事的許願？
           </span>
         </div>
-      </div>
+      </motion.div>
 
       {/* issue 3 */}
-      <div
+      <motion.div
+        variants={variants}
         className={clsx(
           "relative",
           "flex flex-1 flex-col justify-center",
@@ -222,7 +245,8 @@ function Issue() {
           )}
         >
           <img
-            src={require("~/assets/image/dialog/dialog-purple.png")}
+            className="shadow-primary-1 drop-shadow"
+            src={require("~/assets/icon/dialog-1.svg")}
             role="presentation"
             alt="presentation"
           />
@@ -239,7 +263,7 @@ function Issue() {
             動畫技能樹太雜無從下手？
           </span>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
