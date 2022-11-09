@@ -13,7 +13,6 @@ const variants: Variants = {
     opacity: 1,
     scale: 1,
     transition: {
-      // delay: 0.5,
       ease: easeOutElastic,
       duration: 0.8,
     },

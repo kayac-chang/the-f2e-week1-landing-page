@@ -1,15 +1,15 @@
 import clsx from "clsx";
 import { last, map, multiply, range } from "ramda";
-import { Fragment } from "react";
 import type { AnimationControls } from "framer-motion";
 import { motion } from "framer-motion";
 import { GlitchText, NeonText } from "~/components/RichText";
 import SVG from "~/components/SVG";
-import { button, flex, section } from "~/styles/common";
+import { button, section } from "~/styles/common";
 import { transform } from "~/utils/css";
 import { useAnimationSeq } from "~/utils/animation";
 import type { ComponentProps } from "react";
 import type { Vec2 } from "~/utils/css";
+import Marquee from "./Marquee";
 
 type DecorationProps = ComponentProps<"div">;
 
@@ -137,19 +137,12 @@ function DecorationArrow(props: DecorationProps) {
             role="presentation"
             alt="presentation"
             className="absolute w-1"
-            style={{
-              ...transform(position),
-            }}
+            style={transform(position)}
           />
         ))}
 
         {/* arrow */}
-        <div
-          className="absolute"
-          style={{
-            ...transform(last_positions),
-          }}
-        >
+        <div className="absolute" style={transform(last_positions)}>
           <img
             src={require("~/assets/image/decoration/triangle.png")}
             role="presentation"
@@ -353,30 +346,15 @@ function Banner(props: ComponentProps<"section">) {
       </motion.button>
 
       {/* marquee */}
-      <motion.div
-        animate={{
-          x: ["25%", "-25%"],
-        }}
-        transition={{
-          ease: "linear",
-          repeat: Infinity,
-          repeatType: "loop",
-          duration: 20,
-        }}
-        className={clsx(flex.nowrap, "mt-auto", "gap-6")}
-      >
-        {range(0, 40).map((i) => (
-          <Fragment key={i}>
-            <NeonText className="h4 w-max font-monument-extended uppercase">
-              join us
-            </NeonText>
-            <SVG
-              className="mb-1 w-6"
-              src={require("~/assets/icon/little-star.svg")}
-            />
-          </Fragment>
-        ))}
-      </motion.div>
+      <Marquee className="mt-auto gap-6">
+        <NeonText className="h4 w-max font-monument-extended uppercase">
+          join us
+        </NeonText>
+        <SVG
+          className="mb-1 w-6"
+          src={require("~/assets/icon/little-star.svg")}
+        />
+      </Marquee>
     </section>
   );
 }

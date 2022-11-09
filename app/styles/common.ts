@@ -8,6 +8,7 @@ export const flex = {
   col: "flex flex-col",
   col_center: "flex flex-col items-center",
   row_center: "flex flex-row items-center",
+  center: "flex justify-center items-center",
   nowrap: "flex flex-nowrap items-center [&>*]:whitespace-nowrap",
 };
 export const section = clsx(flex.col, "w-full h-full overflow-hidden");

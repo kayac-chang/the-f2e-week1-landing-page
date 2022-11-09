@@ -3,105 +3,17 @@ import SVG from "~/components/SVG";
 import Tabs from "~/components/Tabs";
 import Banner from "~/components/Banner";
 import Issue from "~/components/Issue";
+import Solution from "~/components/Solution";
 import { badge, card, flex, section } from "~/styles/common";
-import type { MotionProps, Variants } from "framer-motion";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ComponentPropsWithoutRef,
-  PointerEvent,
-  useMemo,
-  WheelEvent,
-} from "react";
+import { useMemo } from "react";
 import { useCallback } from "react";
 import { cond, pipe } from "ramda";
 import { isNegative, isPositive } from "ramda-adjunct";
 import debounce from "~/utils/debounce";
 import useCounter from "~/hooks/useCounter";
-
-function Section3() {
-  return (
-    <section className={clsx(section, "relative")}>
-      <div className="mt-[4.8rem]">
-        <h2 className="sr-only">solution</h2>
-
-        {/* background */}
-        <img
-          className="absolute inset-0 -z-10 h-full object-cover"
-          src={require("~/assets/image/background.jpg")}
-          role="presentation"
-          alt="presentation"
-        />
-
-        {/* marquee */}
-        <div
-          className={clsx(
-            "gradient-decoration bg-gradient-to-r py-2 px-2",
-            flex.nowrap,
-            "gap-6"
-          )}
-        >
-          <span className="p2 whitespace-nowrap font-monument-extended uppercase tracking-[0.1em]">
-            Interactive web design
-          </span>
-          <img
-            src={require("~/assets/image/decoration/ball-white.png")}
-            role="presentation"
-            alt="presentation"
-          />
-        </div>
-
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="relative flex items-center justify-center">
-            {/* right hand */}
-            <img
-              className="absolute w-48 -translate-y-[90%] rotate-[-54deg]"
-              src={require("~/assets/image/right-hand.png")}
-              role="presentation"
-              alt="presentation"
-            />
-
-            {/* left hand */}
-            <img
-              className="absolute w-48 translate-y-[90%] rotate-[48deg] -scale-100"
-              src={require("~/assets/image/left-hand.png")}
-              role="presentation"
-              alt="presentation"
-            />
-
-            {/* banner purple */}
-            <img
-              className="absolute translate-x-28 -translate-y-36 scale-75"
-              src={require("~/assets/image/banner-purple.png")}
-              role="presentation"
-              alt="presentation"
-            />
-
-            {/* banner yellow */}
-            <img
-              className="absolute -translate-x-24 translate-y-full scale-75"
-              src={require("~/assets/image/banner-yellow.png")}
-              role="presentation"
-              alt="presentation"
-            />
-
-            {/* title */}
-            <div className="relative flex w-[75vw] items-center justify-center">
-              <SVG
-                className="w-full"
-                src={require("~/assets/icon/dialog-strong.svg")}
-              />
-              <SVG
-                className="absolute w-11/12"
-                src={require("~/assets/icon/title.svg")}
-              />
-              <h2 className="sr-only">互動式網頁設計</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+import type { MotionProps, Variants } from "framer-motion";
+import type { ComponentPropsWithoutRef, PointerEvent, WheelEvent } from "react";
 
 function Section4() {
   return (
@@ -971,16 +883,17 @@ export default function Index() {
   const [page, setPage] = useCounter(0, 2);
 
   const onWheel = useCallback(
-    debounce.byLeadFrame(
-      pipe(
-        getWheelDirection,
-        cond([
-          [isPositive, setPage.inc],
-          [isNegative, setPage.dec],
-        ])
-      )
-    ),
-    [setPage]
+    (event: WheelEvent) =>
+      debounce.byLeadFrame(
+        pipe(
+          getWheelDirection,
+          cond([
+            [isPositive, setPage.inc],
+            [isNegative, setPage.dec],
+          ])
+        )
+      )(event),
+    [setPage.inc, setPage.dec]
   );
 
   const onPointer = useMemo(() => {
@@ -1013,7 +926,7 @@ export default function Index() {
         <Issue />
       </Page>
       <Page show={page === 2}>
-        <Section3 />
+        <Solution />
       </Page>
 
       {/* <Section4 /> */}
