@@ -5,15 +5,7 @@ import Banner from "~/components/Banner";
 import Issue from "~/components/Issue";
 import Solution from "~/components/Solution";
 import { badge, card, flex, section } from "~/styles/common";
-import { AnimatePresence, motion } from "framer-motion";
-import { useMemo } from "react";
-import { useCallback } from "react";
-import { cond, pipe } from "ramda";
-import { isNegative, isPositive } from "ramda-adjunct";
-import debounce from "~/utils/debounce";
-import useCounter from "~/hooks/useCounter";
-import type { MotionProps, Variants } from "framer-motion";
-import type { ComponentPropsWithoutRef, PointerEvent, WheelEvent } from "react";
+import { Pages, Page } from "~/components/FullPageScroll";
 
 function Section4() {
   return (
@@ -841,99 +833,23 @@ function Sponsors() {
   );
 }
 
-const getWheelDirection = (event: WheelEvent) => Math.sign(event.deltaY);
-
-const variants: Variants = {
-  initial: { opacity: 0, y: 30 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      delayChildren: 0.8,
-      staggerChildren: 0.8,
-    },
-  },
-  exit: { opacity: 0, y: -30, transition: { duration: 0.5 } },
-};
-
-type PageProps = MotionProps &
-  ComponentPropsWithoutRef<"div"> & {
-    show?: boolean;
-  };
-function Page({ show, ...props }: PageProps) {
-  return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          layout
-          className="h-full"
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={variants}
-          {...props}
-        />
-      )}
-    </AnimatePresence>
-  );
-}
-
 export default function Index() {
-  const [page, setPage] = useCounter(0, 2);
-
-  const onWheel = useCallback(
-    (event: WheelEvent) =>
-      debounce.byLeadFrame(
-        pipe(
-          getWheelDirection,
-          cond([
-            [isPositive, setPage.inc],
-            [isNegative, setPage.dec],
-          ])
-        )
-      )(event),
-    [setPage.inc, setPage.dec]
-  );
-
-  const onPointer = useMemo(() => {
-    let start = 0;
-
-    function onPointerDown(event: PointerEvent) {
-      start = event.pageY;
-    }
-
-    function onPointerUp(event: PointerEvent) {
-      const delta = -Math.sign(event.pageY - start);
-
-      cond([
-        [isPositive, setPage.inc],
-        [isNegative, setPage.dec],
-      ])(delta);
-    }
-
-    return { onPointerUp, onPointerDown };
-  }, [setPage]);
-
-  const handler = { onWheel, ...onPointer };
-
   return (
-    <main className="flex-1 overflow-clip" {...handler}>
-      <Page show={page === 0}>
+    <Pages as="main" className="flex-1 overflow-clip">
+      <Page>
         <Banner />
       </Page>
-      <Page show={page === 1}>
+      <Page>
         <Issue />
       </Page>
-      <Page show={page === 2}>
+      <Page>
         <Solution />
       </Page>
-
       {/* <Section4 /> */}
       {/* <Section5 /> */}
       {/* <Section6 /> */}
       {/* <Section7 /> */}
       {/* <Sponsors /> */}
-    </main>
+    </Pages>
   );
 }
