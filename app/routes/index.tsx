@@ -835,7 +835,7 @@ function Sponsors() {
 
 export default function Index() {
   return (
-    <Pages as="main" className="flex-1 overflow-clip">
+    <Pages as="main" className="flex-1 overflow-hidden">
       <Page>
         <Banner />
       </Page>

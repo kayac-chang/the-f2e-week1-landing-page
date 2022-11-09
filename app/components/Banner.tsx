@@ -1,15 +1,15 @@
 import clsx from "clsx";
 import { last, map, multiply, range } from "ramda";
-import type { AnimationControls } from "framer-motion";
 import { motion } from "framer-motion";
 import { GlitchText, NeonText } from "~/components/RichText";
 import SVG from "~/components/SVG";
+import Marquee from "~/components/Marquee";
 import { button, section } from "~/styles/common";
 import { transform } from "~/utils/css";
 import { useAnimationSeq } from "~/utils/animation";
+import type { AnimationControls } from "framer-motion";
 import type { ComponentProps } from "react";
 import type { Vec2 } from "~/utils/css";
-import Marquee from "./Marquee";
 
 type DecorationProps = ComponentProps<"div">;
 
@@ -346,15 +346,17 @@ function Banner(props: ComponentProps<"section">) {
       </motion.button>
 
       {/* marquee */}
-      <Marquee className="mt-auto gap-6">
-        <NeonText className="h4 w-max font-monument-extended uppercase">
-          join us
-        </NeonText>
-        <SVG
-          className="mb-1 w-6"
-          src={require("~/assets/icon/little-star.svg")}
-        />
-      </Marquee>
+      <div className="mt-auto w-full">
+        <Marquee className="gap-6">
+          <NeonText className="h4 w-max font-monument-extended uppercase">
+            join us
+          </NeonText>
+          <SVG
+            className="mb-1 w-6"
+            src={require("~/assets/icon/little-star.svg")}
+          />
+        </Marquee>
+      </div>
     </section>
   );
 }

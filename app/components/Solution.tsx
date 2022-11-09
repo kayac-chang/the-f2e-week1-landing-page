@@ -1,7 +1,50 @@
 import clsx from "clsx";
+import { motion } from "framer-motion";
 import SVG from "~/components/SVG";
 import Marquee from "~/components/Marquee";
 import { flex, section } from "~/styles/common";
+import { merge } from "~/utils/animation";
+import type { Variants } from "framer-motion";
+
+const fade_in: Variants = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 1,
+    },
+  },
+};
+
+const scale_up: Variants = {
+  initial: {
+    scale: 0.85,
+  },
+  animate: {
+    scale: 1,
+  },
+};
+
+const move: Record<string, Variants> = {
+  down: {
+    initial: {
+      y: -30,
+    },
+    animate: {
+      y: 0,
+    },
+  },
+  up: {
+    initial: {
+      y: 30,
+    },
+    animate: {
+      y: 0,
+    },
+  },
+};
 
 function Solution() {
   return (
@@ -78,37 +121,59 @@ function Solution() {
           />
 
           {/* right hand */}
-          <img
+          <motion.div
             className={clsx(
-              "w-48",
-              "md:w-60",
               "absolute",
-              "-top-[80%] rotate-[-54deg]",
-              "md:top-0 md:-right-1/2 md:rotate-0"
+              "-top-[80%]",
+              "md:top-0 md:-right-1/2"
               //
             )}
-            src={require("~/assets/image/right-hand.png")}
-            role="presentation"
-            alt="presentation"
-          />
+            variants={merge(fade_in, move.up)}
+          >
+            <img
+              className={clsx(
+                "w-48",
+                "md:w-60",
+                "rotate-[-54deg]",
+                "md:rotate-0"
+                //
+              )}
+              src={require("~/assets/image/right-hand.png")}
+              role="presentation"
+              alt="presentation"
+            />
+          </motion.div>
 
           {/* left hand */}
-          <img
+          <motion.div
             className={clsx(
-              "w-48",
-              "md:w-60",
-              "absolute -scale-100",
-              "-bottom-[80%] rotate-[48deg]",
-              "md:top-0 md:-left-1/2 md:rotate-0 md:scale-100"
+              "absolute",
+              "-bottom-[80%]",
+              "md:top-0 md:-left-1/2"
               //
             )}
-            src={require("~/assets/image/left-hand.png")}
-            role="presentation"
-            alt="presentation"
-          />
+            variants={merge(fade_in, move.down)}
+          >
+            <img
+              className={clsx(
+                "w-48",
+                "md:w-60",
+                "-scale-100",
+                "rotate-[48deg]",
+                "md:rotate-0 md:scale-100"
+                //
+              )}
+              src={require("~/assets/image/left-hand.png")}
+              role="presentation"
+              alt="presentation"
+            />
+          </motion.div>
 
           {/* title */}
-          <div className={clsx(flex.center, "relative w-full")}>
+          <motion.div
+            className={clsx(flex.center, "relative w-full")}
+            variants={merge(fade_in, scale_up)}
+          >
             <SVG
               className="w-full"
               src={require("~/assets/icon/dialog-strong.svg")}
@@ -118,19 +183,20 @@ function Solution() {
               src={require("~/assets/icon/title.svg")}
             />
             <h2 className="sr-only">互動式網頁設計</h2>
-          </div>
+          </motion.div>
 
-          <div
+          <motion.div
             className={clsx(
               flex.row_center,
               "mt-2 gap-8",
               "font-noto-sans-tc text-xl text-black"
             )}
+            variants={merge(fade_in, scale_up)}
           >
             <strong>前端工程師</strong>
             <SVG className="s-6" src={require("~/assets/icon/close.svg")} />
             <strong>UI設計師</strong>
-          </div>
+          </motion.div>
         </div>
       </div>
 

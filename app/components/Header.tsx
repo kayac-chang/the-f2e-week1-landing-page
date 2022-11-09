@@ -18,7 +18,7 @@ const links = Object.freeze({
 function Header() {
   const [isMenuOpen, toggleMenu] = useToggle();
   return (
-    <header className="ch related z-10 w-full">
+    <header className="related z-10 w-full font-noto-sans-tc">
       {/* sm */}
       <div className={clsx("px-4 py-5 lg:hidden", flex.row_center, theme.main)}>
         {/* menu trigger */}

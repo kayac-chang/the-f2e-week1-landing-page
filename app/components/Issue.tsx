@@ -1,8 +1,9 @@
 import clsx from "clsx";
+import { motion } from "framer-motion";
 import SVG from "~/components/SVG";
 import { section } from "~/styles/common";
-import { motion, Variants } from "framer-motion";
 import { easeOutElastic } from "~/utils/ease";
+import type { Variants } from "framer-motion";
 
 const variants: Variants = {
   initial: {
