@@ -4,154 +4,9 @@ import Tabs from "~/components/Tabs";
 import Banner from "~/components/Banner";
 import Issue from "~/components/Issue";
 import Solution from "~/components/Solution";
-import { badge, card, flex, section } from "~/styles/common";
+import Information from "~/components/Information";
 import { Pages, Page } from "~/components/FullPageScroll";
-
-function Section4() {
-  return (
-    <section
-      className={clsx(
-        section,
-        "px-8 pt-40 pb-16",
-        "items-center gap-12",
-        "text-center"
-      )}
-    >
-      <h2
-        className={clsx(
-          "ch h3 font-medium",
-          "rounded-full",
-          "text-secondary-1",
-          "border-4 border-secondary-1",
-          "text-shadow green shadow",
-          "px-12 py-4",
-          "relative"
-        )}
-      >
-        {/* light big */}
-        <img
-          className="absolute right-0 bottom-full w-12 translate-x-4"
-          src={require("~/assets/image/decoration/light.png")}
-          role="presentation"
-          alt="presentation"
-        />
-
-        {/* light small */}
-        <img
-          className={clsx(
-            "absolute right-0 bottom-full",
-            "translate-x-6 translate-y-6 rotate-[32deg]",
-            "w-8"
-          )}
-          src={require("~/assets/image/decoration/light.png")}
-          role="presentation"
-          alt="presentation"
-        />
-
-        <div>年度最強合作</div>
-        <div>三大主題來襲</div>
-      </h2>
-
-      <div className="ch p2">
-        <div>各路廠商強強聯手</div>
-        <div>共同設計出接地氣的</div>
-        <div>網頁互動挑戰關卡</div>
-      </div>
-
-      <div className="ch grid w-full gap-12">
-        {/* card 1 */}
-        <div className={clsx(card, "p-4", "bg-white text-primary-3")}>
-          <div className={badge}>
-            <strong className="text-neutral-5"># 板塊設計</strong>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="h4 font-bold uppercase">The F2E 活動網站設計</h3>
-            <p className="p2 font-montserrat font-medium">視覺滾動</p>
-          </div>
-
-          <img
-            src={require("~/assets/image/dashboard-1x.png")}
-            role="presentation"
-            alt="presentation"
-          />
-
-          <div className="sub-title flex w-full items-center justify-between">
-            <p className="en text-primary-2">WEEK 1</p>
-
-            <a href="/" className="flex items-center">
-              <strong>查看關卡細節</strong>
-              <SVG
-                className="w-6"
-                src={require("~/assets/icon/arrow-up-right.svg")}
-              />
-            </a>
-          </div>
-        </div>
-
-        {/* card 2 */}
-        <div className={clsx(card, "p-4", "bg-white text-primary-3")}>
-          <div className={badge}>
-            <strong className="text-neutral-5"># 凱鈿行動科技</strong>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="h4 font-bold uppercase">今晚，我想來點點簽</h3>
-            <p className="p2 font-montserrat font-medium">CANVAS</p>
-          </div>
-
-          <img
-            src={require("~/assets/image/edit.png")}
-            role="presentation"
-            alt="presentation"
-          />
-
-          <div className="sub-title flex w-full items-center justify-between">
-            <p className="en text-primary-2">WEEK 2</p>
-
-            <a href="/" className="flex items-center">
-              <strong>查看關卡細節</strong>
-              <SVG
-                className="w-6"
-                src={require("~/assets/icon/arrow-up-right.svg")}
-              />
-            </a>
-          </div>
-        </div>
-
-        {/* card 3 */}
-        <div className={clsx(card, "p-4", "bg-white text-primary-3")}>
-          <div className={badge}>
-            <strong className="text-neutral-5"># 鈦坦科技</strong>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="h4 font-bold uppercase">Scrum 新手村</h3>
-            <p className="p2 font-montserrat font-medium">JS Draggable</p>
-          </div>
-
-          <img
-            src={require("~/assets/image/exchange.png")}
-            role="presentation"
-            alt="presentation"
-          />
-
-          <div className="sub-title flex w-full items-center justify-between">
-            <p className="en text-primary-2">WEEK 3</p>
-
-            <a href="/" className="flex items-center">
-              <strong>查看關卡細節</strong>
-              <SVG
-                className="w-6"
-                src={require("~/assets/icon/arrow-up-right.svg")}
-              />
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+import { badge, card, flex, section } from "~/styles/common";
 
 function Section5() {
   return (
@@ -836,16 +691,20 @@ function Sponsors() {
 export default function Index() {
   return (
     <Pages as="main" className="flex-1 overflow-hidden">
+      {/* <Page> */}
+      {/*   <Banner /> */}
+      {/* </Page> */}
+      {/* <Page> */}
+      {/*   <Issue /> */}
+      {/* </Page> */}
+      {/* <Page> */}
+      {/*   <Solution /> */}
+      {/* </Page> */}
+
       <Page>
-        <Banner />
+        <Information />
       </Page>
-      <Page>
-        <Issue />
-      </Page>
-      <Page>
-        <Solution />
-      </Page>
-      {/* <Section4 /> */}
+
       {/* <Section5 /> */}
       {/* <Section6 /> */}
       {/* <Section7 /> */}

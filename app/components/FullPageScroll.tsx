@@ -3,6 +3,7 @@ import { useMemo, isValidElement, cloneElement } from "react";
 import { cond, pipe } from "ramda";
 import { isNegative, isPositive } from "ramda-adjunct";
 import { deepForEach } from "react-children-utilities";
+import { assert } from "@sindresorhus/is";
 import debounce from "~/utils/debounce";
 import useCounter from "~/hooks/useCounter";
 import type { MotionProps, Variants } from "framer-motion";
@@ -14,9 +15,7 @@ import type {
   ReactNode,
 } from "react";
 import type { PolymorphicComponentProps } from "~/utils/types";
-import { ClientOnly } from "remix-utils";
-
-const getWheelDirection = (event: WheelEvent) => Math.sign(event.deltaY);
+import { getWheelDirection } from "~/utils/dom";
 
 const variants: Variants = {
   initial: { opacity: 0, y: 30 },
@@ -62,7 +61,7 @@ export function Pages<E extends ElementType>(
     if (isValidElement(child) && child.type === Page) children.push(child);
   });
 
-  const [page, setPage] = useCounter(0, children.length);
+  const [page, setPage] = useCounter(0, children.length - 1);
 
   const onWheel = useMemo(
     () =>
@@ -97,7 +96,10 @@ export function Pages<E extends ElementType>(
     return { onPointerUp, onPointerDown };
   }, [setPage]);
 
-  const handler = { onWheel, ...onPointer };
+  const handler = {
+    onWheel,
+    ...onPointer,
+  };
   const Component = props.as ?? "div";
 
   return (
