@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, isValidElement, cloneElement } from "react";
 import { cond, pipe } from "ramda";
 import { isNegative, isPositive } from "ramda-adjunct";
-import { deepForEach } from "react-children-utilities";
 import debounce from "~/utils/debounce";
 import useCounter from "~/hooks/useCounter";
 import type { MotionProps, Variants } from "framer-motion";
@@ -10,24 +9,26 @@ import type {
   ComponentPropsWithoutRef,
   PointerEvent,
   ElementType,
-  ReactNode,
 } from "react";
 import type { PolymorphicComponentProps } from "~/utils/types";
 import { getWheelDirection } from "~/utils/dom";
 import { merge } from "~/utils/animation";
+import { deepFilter } from "~/utils/children";
 
 const variants: Variants = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0 },
   animate: {
-    opacity: 1,
-    y: 0,
+    opacity: [0, 1],
+    y: [30, 0],
     transition: {
       duration: 0.5,
       delayChildren: 0.8,
-      // staggerChildren: 0.5,
     },
   },
-  exit: { opacity: 0, y: -30, transition: { duration: 0.5 } },
+  exit: {
+    opacity: [1, 0],
+    transition: { duration: 0.2 },
+  },
 };
 
 type PageProps = MotionProps &
@@ -36,7 +37,7 @@ type PageProps = MotionProps &
   };
 export function Page({ show, ...props }: PageProps) {
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="popLayout">
       {show && (
         <motion.div
           {...props}
@@ -55,10 +56,10 @@ export function Page({ show, ...props }: PageProps) {
 export function Pages<E extends ElementType>(
   props: PolymorphicComponentProps<E, {}>
 ) {
-  const children: ReturnType<typeof Page>[] = [];
-  deepForEach(props.children, (child: ReactNode) => {
-    if (isValidElement(child) && child.type === Page) children.push(child);
-  });
+  const children = deepFilter(
+    (child) => isValidElement(child) && child.type === Page,
+    props.children
+  ) as ReturnType<typeof Page>[];
 
   const [page, setPage] = useCounter(0, children.length - 1);
 

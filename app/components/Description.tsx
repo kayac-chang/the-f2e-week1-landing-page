@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { range } from "ramda";
 import { Fragment } from "react";
+import { useBreakPoint } from "~/hooks/useMediaQuery";
 import { card, section, flex } from "~/styles/common";
 import { onlyPropagationWhenOverScroll } from "~/utils/dom";
 import { percent } from "~/utils/math";
@@ -62,7 +63,9 @@ function Description() {
         "bg-neutral-4",
         "overflow-scroll"
       )}
-      onWheel={onlyPropagationWhenOverScroll}
+      {...(!useBreakPoint("lg") && {
+        onWheel: onlyPropagationWhenOverScroll,
+      })}
     >
       <h2 className="flex items-center">
         <img

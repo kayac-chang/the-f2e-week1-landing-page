@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import SVG from "~/components/SVG";
+import { useBreakPoint } from "~/hooks/useMediaQuery";
 import { badge, card, section } from "~/styles/common";
 import { onlyPropagationWhenOverScroll } from "~/utils/dom";
 
@@ -57,7 +58,9 @@ function Information() {
         "text-center",
         "overflow-scroll"
       )}
-      onWheel={onlyPropagationWhenOverScroll}
+      {...(!useBreakPoint("lg") && {
+        onWheel: onlyPropagationWhenOverScroll,
+      })}
     >
       <h2
         className={clsx(

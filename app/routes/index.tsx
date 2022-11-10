@@ -505,18 +505,18 @@ function Sponsors() {
 export default function Index() {
   return (
     <Pages as="main" className="flex-1 overflow-hidden">
-      {/* <Page> */}
-      {/*   <Banner /> */}
-      {/* </Page> */}
-      {/* <Page> */}
-      {/*   <Issue /> */}
-      {/* </Page> */}
-      {/* <Page> */}
-      {/*   <Solution /> */}
-      {/* </Page> */}
-      {/* <Page> */}
-      {/*   <Information /> */}
-      {/* </Page> */}
+      <Page>
+        <Banner />
+      </Page>
+      <Page>
+        <Issue />
+      </Page>
+      <Page>
+        <Solution />
+      </Page>
+      <Page>
+        <Information />
+      </Page>
       <Page>
         <Description />
       </Page>

@@ -6,13 +6,9 @@ import { easeOutElastic } from "~/utils/ease";
 import type { Variants } from "framer-motion";
 
 const variants: Variants = {
-  initial: {
-    opacity: 0,
-    scale: 0,
-  },
   animate: {
-    opacity: 1,
-    scale: 1,
+    opacity: [0, 1],
+    scale: [0, 1],
     transition: {
       ease: easeOutElastic,
       duration: 0.8,
