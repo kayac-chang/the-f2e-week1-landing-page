@@ -1,6 +1,7 @@
 import type { Variants, AnimationControls } from "framer-motion";
 import { useAnimation, useIsomorphicLayoutEffect } from "framer-motion";
-import { mergeDeepLeft } from "ramda";
+import { mergeDeepRight } from "ramda";
+import type { Falsy } from "ramda";
 
 interface Sequence {
   (animation: AnimationControls): Promise<void>;
@@ -27,6 +28,8 @@ export function useAnimationSeq(...sequences: Sequence[]) {
   return animation;
 }
 
-export function merge(a: Variants, b: Variants): Variants {
-  return mergeDeepLeft(a, b) as Variants;
+export function merge(...variants: (Variants | Falsy)[]): Variants {
+  const _variants = variants.filter(Boolean) as Variants[];
+
+  return _variants.reduce(mergeDeepRight);
 }

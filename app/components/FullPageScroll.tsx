@@ -14,6 +14,7 @@ import type {
   ReactNode,
 } from "react";
 import type { PolymorphicComponentProps } from "~/utils/types";
+import { ClientOnly } from "remix-utils";
 
 const getWheelDirection = (event: WheelEvent) => Math.sign(event.deltaY);
 

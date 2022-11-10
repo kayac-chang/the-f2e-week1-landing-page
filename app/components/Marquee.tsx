@@ -9,7 +9,7 @@ import type { ReactNode } from "react";
 
 const variants: Variants = {
   animate: {
-    x: ["0%", "-75%"],
+    x: ["0%", "-25%"],
     transition: {
       ease: "linear",
       repeat: Infinity,
@@ -26,7 +26,7 @@ type MarqueeProps = {
   pause?: boolean;
 };
 function Marquee(props: MarqueeProps) {
-  const count = props.count ?? 10;
+  const count = props.count ?? 20;
   const duration = props.duration ?? 20;
 
   const animation = useAnimationControls();

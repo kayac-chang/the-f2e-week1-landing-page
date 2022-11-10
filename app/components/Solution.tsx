@@ -7,11 +7,8 @@ import { merge } from "~/utils/animation";
 import type { Variants } from "framer-motion";
 
 const fade_in: Variants = {
-  initial: {
-    opacity: 0,
-  },
   animate: {
-    opacity: 1,
+    opacity: [0, 1],
     transition: {
       duration: 1,
     },
@@ -19,29 +16,30 @@ const fade_in: Variants = {
 };
 
 const scale_up: Variants = {
-  initial: {
-    scale: 0.85,
-  },
   animate: {
-    scale: 1,
+    scale: [0.85, 1],
   },
 };
 
 const move: Record<string, Variants> = {
   down: {
-    initial: {
-      y: -30,
-    },
     animate: {
-      y: 0,
+      y: [-30, 0],
     },
   },
   up: {
-    initial: {
-      y: 30,
-    },
     animate: {
-      y: 0,
+      y: [30, 0],
+    },
+  },
+  right: {
+    animate: {
+      x: [-30, 0],
+    },
+  },
+  left: {
+    animate: {
+      x: [30, 0],
     },
   },
 };
@@ -120,12 +118,12 @@ function Solution() {
             alt="presentation"
           />
 
-          {/* right hand */}
+          {/* right hand / sm */}
           <motion.div
             className={clsx(
               "absolute",
               "-top-[80%]",
-              "md:top-0 md:-right-1/2"
+              "md:hidden"
               //
             )}
             variants={merge(fade_in, move.up)}
@@ -143,16 +141,64 @@ function Solution() {
               alt="presentation"
             />
           </motion.div>
+          {/* right hand / md */}
+          <motion.div
+            className={clsx(
+              "hidden md:block",
+              "absolute",
+              "top-0 -right-1/2"
+              //
+            )}
+            variants={merge(fade_in, move.right)}
+          >
+            <img
+              className={clsx(
+                "w-48",
+                "md:w-60",
+                "rotate-[-54deg]",
+                "md:rotate-0"
+                //
+              )}
+              src={require("~/assets/image/right-hand.png")}
+              role="presentation"
+              alt="presentation"
+            />
+          </motion.div>
 
-          {/* left hand */}
+          {/* left hand / sm */}
           <motion.div
             className={clsx(
               "absolute",
               "-bottom-[80%]",
-              "md:top-0 md:-left-1/2"
+              "md:hidden"
               //
             )}
             variants={merge(fade_in, move.down)}
+          >
+            <img
+              className={clsx(
+                "w-48",
+                "md:w-60",
+                "-scale-100",
+                "rotate-[48deg]",
+                "md:rotate-0 md:scale-100"
+                //
+              )}
+              src={require("~/assets/image/left-hand.png")}
+              role="presentation"
+              alt="presentation"
+            />
+          </motion.div>
+          {/* left hand / md */}
+          <motion.div
+            className={clsx(
+              "hidden md:block",
+              "absolute",
+              "-bottom-[80%]",
+              "top-0 -left-1/2"
+              //
+            )}
+            variants={merge(fade_in, move.left)}
           >
             <img
               className={clsx(
