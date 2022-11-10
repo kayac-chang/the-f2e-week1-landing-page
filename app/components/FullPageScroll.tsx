@@ -3,19 +3,18 @@ import { useMemo, isValidElement, cloneElement } from "react";
 import { cond, pipe } from "ramda";
 import { isNegative, isPositive } from "ramda-adjunct";
 import { deepForEach } from "react-children-utilities";
-import { assert } from "@sindresorhus/is";
 import debounce from "~/utils/debounce";
 import useCounter from "~/hooks/useCounter";
 import type { MotionProps, Variants } from "framer-motion";
 import type {
   ComponentPropsWithoutRef,
   PointerEvent,
-  WheelEvent,
   ElementType,
   ReactNode,
 } from "react";
 import type { PolymorphicComponentProps } from "~/utils/types";
 import { getWheelDirection } from "~/utils/dom";
+import { merge } from "~/utils/animation";
 
 const variants: Variants = {
   initial: { opacity: 0, y: 30 },
@@ -40,13 +39,13 @@ export function Page({ show, ...props }: PageProps) {
     <AnimatePresence>
       {show && (
         <motion.div
+          {...props}
           layout
           className="h-full"
           initial="initial"
           animate="animate"
           exit="exit"
-          variants={variants}
-          {...props}
+          variants={merge(variants, props.variants)}
         />
       )}
     </AnimatePresence>

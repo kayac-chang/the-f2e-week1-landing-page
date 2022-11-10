@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import SVG from "~/components/SVG";
 import { badge, card, section } from "~/styles/common";
-import { isReachBottom, isReachTop, isWheelDown, isWheelUp } from "~/utils/dom";
+import { onlyPropagationWhenOverScroll } from "~/utils/dom";
 
 type CardProps = {
   badge: string;
@@ -57,20 +57,7 @@ function Information() {
         "text-center",
         "overflow-scroll"
       )}
-      onWheel={(event) => {
-        // we want user only navigate to next section when they reach to the edge of the page,
-        // so we have to prevent event propagation to full page scroll.
-
-        if (isWheelDown(event) && isReachBottom(event.currentTarget)) {
-          return;
-        }
-
-        if (isWheelUp(event) && isReachTop(event.currentTarget)) {
-          return;
-        }
-
-        return event.stopPropagation();
-      }}
+      onWheel={onlyPropagationWhenOverScroll}
     >
       <h2
         className={clsx(

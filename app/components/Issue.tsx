@@ -20,9 +20,18 @@ const variants: Variants = {
   },
 };
 
+const stagger: Variants = {
+  animate: {
+    transition: {
+      staggerChildren: 0.5,
+    },
+  },
+};
+
 function Issue() {
   return (
-    <section
+    <motion.section
+      variants={stagger}
       className={clsx(
         section,
         "px-6 py-8",
@@ -264,7 +273,7 @@ function Issue() {
           </span>
         </div>
       </motion.div>
-    </section>
+    </motion.section>
   );
 }
 

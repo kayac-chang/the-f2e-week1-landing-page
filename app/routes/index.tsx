@@ -7,193 +7,7 @@ import Solution from "~/components/Solution";
 import Information from "~/components/Information";
 import { Pages, Page } from "~/components/FullPageScroll";
 import { badge, card, flex, section } from "~/styles/common";
-
-function Section5() {
-  return (
-    <section
-      className={clsx(
-        section,
-        "mt-20 px-4 pt-16 pb-16",
-        "items-center gap-12",
-        "text-center",
-        "bg-neutral-4"
-      )}
-    >
-      <h2 className="ch h3 flex items-center">
-        <img
-          className="mr-2 w-8"
-          src={require("~/assets/image/decoration/player.png")}
-          role="presentation"
-          alt="presentation"
-        />
-        <div className="flex items-center gap-4">
-          <img
-            src={require("~/assets/image/decoration/ball-white.png")}
-            role="presentation"
-            alt="presentation"
-          />
-          <img
-            src={require("~/assets/image/decoration/ball-white.png")}
-            role="presentation"
-            alt="presentation"
-          />
-          <img
-            src={require("~/assets/image/decoration/ball-white.png")}
-            role="presentation"
-            alt="presentation"
-          />
-        </div>
-        <strong className="text-shadow white mx-4 whitespace-nowrap">
-          活動說明
-        </strong>
-
-        <div className="flex items-center gap-4">
-          <img
-            src={require("~/assets/image/decoration/ball-white.png")}
-            role="presentation"
-            alt="presentation"
-          />
-          <img
-            src={require("~/assets/image/decoration/ball-white.png")}
-            role="presentation"
-            alt="presentation"
-          />
-          <img
-            src={require("~/assets/image/decoration/ball-white.png")}
-            role="presentation"
-            alt="presentation"
-          />
-        </div>
-        <img
-          className="ml-2"
-          src={require("~/assets/image/decoration/ball-purple.png")}
-          role="presentation"
-          alt="presentation"
-        />
-      </h2>
-
-      <div className="grid w-full gap-2">
-        {/* card 1 */}
-        <div className={clsx(card, "p-8", "border-4", "ch")}>
-          <img
-            className="w-20"
-            src={require("~/assets/image/pencil.png")}
-            role="presentation"
-            alt="presentation"
-          />
-          <h3 className="font-bold">開放報名</h3>
-
-          <div className="flex flex-col items-center gap-2">
-            <time className="p2 flex gap-2">
-              <span className="text-secondary-1">10/13</span>
-              <span>(四) 早上 11:00</span>
-            </time>
-            <span>|</span>
-            <time className="p2 flex gap-2">
-              <span className="text-secondary-1">10/30</span>
-              <span>(日) 晚上 23:59</span>
-            </time>
-          </div>
-
-          <p className="p2 mt-2">截止前可修改報名組別</p>
-        </div>
-
-        {/* down icon */}
-        <img
-          className="mx-auto"
-          src={require("~/assets/image/down.png")}
-          role="presentation"
-          alt="presentation"
-        />
-
-        {/* card 2 */}
-        <div className={clsx(card, "p-8", "border-4", "ch")}>
-          <img
-            className="w-20"
-            src={require("~/assets/image/clock.png")}
-            role="presentation"
-            alt="presentation"
-          />
-          <h3 className="font-bold">個組別開賽</h3>
-
-          <div className="flex flex-col items-center gap-2">
-            <div className="p2 flex gap-2">
-              <span className="text-secondary-1">10/31</span>
-              <span>UI組、團體組開賽</span>
-            </div>
-            <div className="p2 flex gap-2">
-              <span className="text-secondary-1">11/07</span>
-              <span>前端組開賽</span>
-            </div>
-          </div>
-
-          <p className="p2 mt-2">
-            前端工程師可採用 UI 設計師的設計稿產出完整作品
-          </p>
-        </div>
-
-        {/* down icon */}
-        <img
-          className="mx-auto"
-          src={require("~/assets/image/down.png")}
-          role="presentation"
-          alt="presentation"
-        />
-
-        {/* card 3 */}
-        <div className={clsx(card, "p-8", "border-4", "ch")}>
-          <img
-            className="w-20"
-            src={require("~/assets/image/folder.png")}
-            role="presentation"
-            alt="presentation"
-          />
-          <h3 className="font-bold">登錄作品</h3>
-
-          <div className="flex flex-col items-center gap-2">
-            <time className="p2 flex gap-2">
-              <span className="text-secondary-1">10/31</span>
-              <span>(一) 中午 12:00</span>
-            </time>
-            <span>|</span>
-            <time className="p2 flex gap-2">
-              <span className="text-secondary-1">11/28</span>
-              <span>(一) 中午 12:00</span>
-            </time>
-          </div>
-
-          <p className="p2 mt-2">依賽程登錄作品</p>
-        </div>
-
-        {/* down icon */}
-        <img
-          className="mx-auto"
-          src={require("~/assets/image/down.png")}
-          role="presentation"
-          alt="presentation"
-        />
-
-        {/* card 4 */}
-        <div className={clsx(card, "p-8", "border-4", "ch")}>
-          <img
-            className="w-20"
-            src={require("~/assets/image/play.png")}
-            role="presentation"
-            alt="presentation"
-          />
-          <h3 className="font-bold">線上直播</h3>
-
-          <div className="flex flex-col items-center gap-2">
-            <time className="p2 flex gap-2">
-              <span className="text-secondary-1">11/03 - 11/24</span>
-              <span>每週四</span>
-            </time>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+import Description from "~/components/Description";
 
 function Section6() {
   return (
@@ -700,12 +514,13 @@ export default function Index() {
       {/* <Page> */}
       {/*   <Solution /> */}
       {/* </Page> */}
-
+      {/* <Page> */}
+      {/*   <Information /> */}
+      {/* </Page> */}
       <Page>
-        <Information />
+        <Description />
       </Page>
 
-      {/* <Section5 /> */}
       {/* <Section6 /> */}
       {/* <Section7 /> */}
       {/* <Sponsors /> */}

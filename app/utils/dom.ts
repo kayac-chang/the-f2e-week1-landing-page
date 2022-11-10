@@ -23,3 +23,19 @@ export function isWheelUp(event: WheelEvent): boolean {
 export function isWheelNotMove(event: WheelEvent): boolean {
   return getWheelDirection(event) === 0;
 }
+
+export function isOverScroll(event: WheelEvent<HTMLElement>): boolean {
+  if (isWheelDown(event) && isReachBottom(event.currentTarget)) {
+    return true;
+  }
+  if (isWheelUp(event) && isReachTop(event.currentTarget)) {
+    return true;
+  }
+  return false;
+}
+
+// we want user only navigate to next section when they reach to the edge of the page,
+// so we have to prevent event propagation to full page scroll.
+export function onlyPropagationWhenOverScroll(event: WheelEvent<HTMLElement>) {
+  return !isOverScroll(event) && event.stopPropagation();
+}
