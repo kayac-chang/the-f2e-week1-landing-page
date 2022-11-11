@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { card, section } from "~/styles/common";
+import { onlyPropagationWhenOverScroll } from "~/utils/dom";
 
 function Award() {
   return (
@@ -11,6 +12,7 @@ function Award() {
         "items-center gap-12",
         "overflow-scroll"
       )}
+      onWheel={onlyPropagationWhenOverScroll}
     >
       <header className="w-full max-w-md space-y-4 lg:max-w-screen-lg">
         <h2

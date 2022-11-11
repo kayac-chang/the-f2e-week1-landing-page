@@ -320,6 +320,7 @@ function Banner(props: ComponentProps<"section">) {
 
       {/* register */}
       <motion.button
+        type="button"
         whileHover={{
           scale: 1.2,
           filter: `brightness(1.5)`,

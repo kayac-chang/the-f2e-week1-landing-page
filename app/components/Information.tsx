@@ -13,7 +13,7 @@ type CardProps = {
 };
 function Card(props: CardProps) {
   return (
-    <div className={clsx(card, "p-4", "bg-white text-primary-3")}>
+    <div className={clsx(card, "bg-white p-4 text-primary-3")}>
       <div className={badge}>
         <strong className="text-neutral-5">{props.badge}</strong>
       </div>
