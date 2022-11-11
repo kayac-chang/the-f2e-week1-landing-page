@@ -5,117 +5,10 @@ import Banner from "~/components/Banner";
 import Issue from "~/components/Issue";
 import Solution from "~/components/Solution";
 import Information from "~/components/Information";
-import { Pages, Page } from "~/components/FullPageScroll";
-import { badge, card, flex, section } from "~/styles/common";
 import Description from "~/components/Description";
-
-function Section6() {
-  return (
-    <section
-      className={clsx(
-        section,
-        "ch",
-        "mt-20 px-4 pt-16 pb-16",
-        "items-center gap-12"
-      )}
-    >
-      <header className="w-full space-y-4">
-        <h2 className="h4 text-shadow white text-center font-bold">
-          <div>區區修煉已經無法滿足了嗎？</div>
-          <div>還有比賽等著你！</div>
-        </h2>
-
-        <div className="flex items-baseline justify-between border-b-4 pb-1">
-          <img
-            className="w-8"
-            src={require("~/assets/image/decoration/flag.png")}
-            role="presentation"
-            alt="presentation"
-          />
-
-          <img
-            className="w-20 translate-y-2"
-            src={require("~/assets/image/decoration/car.png")}
-            role="presentation"
-            alt="presentation"
-          />
-        </div>
-      </header>
-
-      <div className="grid gap-6">
-        <div className={clsx(card, "bg-neutral-3", "p-6", "glassy")}>
-          <img
-            src={require("~/assets/image/note.png")}
-            role="presentation"
-            alt="presentation"
-          />
-
-          <h3 className="text-shadow purple font-bold text-primary-1">
-            評審機制
-          </h3>
-
-          <div className="w-full space-y-2">
-            <strong className="h4">初選：</strong>
-            <p className="p2">將由六角學院前端、UI 評審進行第一波篩選。</p>
-          </div>
-
-          <div className="w-full space-y-2">
-            <strong className="h4">決選：</strong>
-            <p className="p2">
-              由六角學院與贊助廠商討論，進行最後篩選，並於 12/30(五)
-              由評審進行直播公布名單！
-            </p>
-          </div>
-        </div>
-
-        <div className={clsx(card, "bg-neutral-3", "p-6", "glassy")}>
-          <img
-            src={require("~/assets/image/coin.png")}
-            role="presentation"
-            alt="presentation"
-          />
-
-          <h3 className="text-shadow purple font-bold text-primary-1">獎金</h3>
-
-          <div className="p2 w-full space-y-2">
-            <strong>初選佳作：</strong>
-            <div className="space-x-2">
-              <span>共六十位</span>
-              <span className="text-secondary-1">數位獎狀</span>
-            </div>
-            <p className="p3 text-neutral-2">每週主題個人組十位、團體組十組</p>
-          </div>
-          <div className="p2 w-full space-y-2">
-            <strong>個人企業獎：</strong>
-            <div className="space-x-2">
-              <span>共六位</span>
-              <span className="text-secondary-1">NTD 3,000/位</span>
-            </div>
-            <p className="p3 text-neutral-2">每週主題個人組十位、團體組十組</p>
-          </div>
-          <div className="p2 w-full space-y-2">
-            <strong>初選佳作：</strong>
-            <div className="space-x-2">
-              <span>共六十位</span>
-              <span className="text-secondary-1">數位獎狀</span>
-            </div>
-            <p className="p3 text-neutral-2">每週主題個人組十位、團體組十組</p>
-          </div>
-          <div className="p2 w-full space-y-2">
-            <strong>團體企業獎：</strong>
-            <div className="space-x-2">
-              <span>共三組 </span>
-              <span className="text-secondary-1">NTD 10,000/組</span>
-            </div>
-            <p className="p3 text-neutral-2">每週主題各 1 組</p>
-          </div>
-
-          <p className="p2 mt-2 w-full">以上皆提供完賽數位獎狀</p>
-        </div>
-      </div>
-    </section>
-  );
-}
+import Award from "~/components/Award";
+import { Pages, Page } from "~/components/FullPageScroll";
+import { card, flex, section } from "~/styles/common";
 
 const tab = clsx(
   "relative",
@@ -521,7 +414,9 @@ export default function Index() {
         <Description />
       </Page>
 
-      {/* <Section6 /> */}
+      <Page>
+        <Award />
+      </Page>
       {/* <Section7 /> */}
       {/* <Sponsors /> */}
     </Pages>

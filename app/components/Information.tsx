@@ -53,7 +53,7 @@ function Information() {
       className={clsx(
         section,
         "font-noto-sans-tc",
-        "px-8 py-16",
+        "px-4 py-16 lg:py-32",
         "items-center gap-12",
         "text-center",
         "overflow-scroll"

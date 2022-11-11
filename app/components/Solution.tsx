@@ -225,7 +225,7 @@ function Solution() {
               src={require("~/assets/icon/dialog-strong.svg")}
             />
             <SVG
-              className="absolute w-11/12"
+              className="absolute w-full"
               src={require("~/assets/icon/title.svg")}
             />
             <h2 className="sr-only">互動式網頁設計</h2>
