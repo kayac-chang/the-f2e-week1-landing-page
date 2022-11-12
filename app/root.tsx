@@ -36,11 +36,16 @@ export const links: LinksFunction = () => [
     rel: "stylesheet",
     href: "https://fonts.cdnfonts.com/css/pilot-command",
   },
+  {
+    rel: "icon",
+    type: "image/x-icon",
+    href: "https://2022.thef2e.com/favicon.ico",
+  },
 ];
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Remix Notes",
+  title: "The F2E 前端 & UI 修煉精神時光屋",
   viewport: "width=device-width,initial-scale=1",
 });
 
