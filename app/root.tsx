@@ -22,11 +22,13 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=optional",
+    href:
+      "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=optional",
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=optional",
+    href:
+      "https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=optional",
   },
   {
     rel: "stylesheet",
@@ -47,6 +49,7 @@ export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "The F2E 前端 & UI 修煉精神時光屋",
   viewport: "width=device-width,initial-scale=1",
+  "og:image": require("~/assets/image/preview.jpg"),
 });
 
 export async function loader() {
