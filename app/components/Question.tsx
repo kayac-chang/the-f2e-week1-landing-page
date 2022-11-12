@@ -9,7 +9,8 @@ const tab = clsx(
   _tab,
   "aria-selected:text-white",
   "aria-selected:after:opacity-100",
-  "[&>*]:aria-selected:text-shadow [&>*]:aria-selected:shadow-white"
+  "[&>*]:aria-selected:text-shadow-md",
+  "[&>*]:aria-selected:shadow-white"
 );
 
 const panel = clsx(
@@ -39,9 +40,9 @@ function Question() {
     >
       <h2
         className={clsx(
-          "text-3xl",
+          "text-3xl sm:text-5xl",
           "text-center font-monument-extended",
-          "text-shadow shadow-white"
+          "shadow-white/75 text-shadow-md"
           //
         )}
       >

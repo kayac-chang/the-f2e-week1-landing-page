@@ -74,7 +74,7 @@ function Award() {
           className={clsx(
             "text-center font-bold",
             "text-2xl md:text-3xl lg:text-4xl",
-            "text-shadow shadow-white",
+            "shadow-white text-shadow-md",
             "space-y-2"
           )}
         >
@@ -126,7 +126,12 @@ function Award() {
             alt="presentation"
           />
 
-          <h3 className="text-shadow text-3xl font-bold text-primary-1 shadow-primary-1">
+          <h3
+            className={clsx(
+              "text-3xl font-bold",
+              "text-primary-1 shadow-primary-1/75 text-shadow-md"
+            )}
+          >
             評審機制
           </h3>
 
@@ -151,7 +156,12 @@ function Award() {
             alt="presentation"
           />
 
-          <h3 className="text-shadow text-3xl font-bold text-primary-1 shadow-primary-1">
+          <h3
+            className={clsx(
+              "text-3xl font-bold",
+              "text-primary-1 shadow-primary-1/75 text-shadow-md"
+            )}
+          >
             獎金
           </h3>
 

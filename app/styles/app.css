@@ -47,13 +47,6 @@
     -webkit-text-stroke: 4px transparent;
   }
 
-  /* Shadow */
-  .shadow {
-    box-shadow: 0px 0px 10px var(--tw-shadow-color);
-  }
-  .text-shadow {
-    text-shadow: 0px 0px 6px var(--tw-shadow-color);
-  }
   .drop-shadow {
     filter: drop-shadow(0 0 10px var(--tw-shadow-color));
   }

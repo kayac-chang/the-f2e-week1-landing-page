@@ -58,10 +58,20 @@ module.exports = {
       screens: {
         xs: "480px",
       },
+      shadow: {
+        sm: "1px",
+        DEFAULT: "2px",
+        md: "3px",
+        lg: "8px",
+        xl: "13px",
+        "2xl": "25px",
+      },
     },
   },
   plugins: [
     require("tailwindcss-aria-plugin"),
+
+    // s: w + h
     plugin(({ matchUtilities, theme }) => {
       matchUtilities(
         {
@@ -71,6 +81,30 @@ module.exports = {
           }),
         },
         { values: theme("spacing") }
+      );
+    }),
+
+    // shadow
+    plugin(({ matchUtilities, theme }) => {
+      matchUtilities(
+        {
+          shadow: (value) => ({
+            boxShadow: `0px 0px ${value} var(--tw-shadow-color)`,
+          }),
+        },
+        { values: theme("shadow") }
+      );
+    }),
+
+    // text-shadow
+    plugin(({ matchUtilities, theme }) => {
+      matchUtilities(
+        {
+          "text-shadow": (value) => ({
+            textShadow: `0px 0px ${value} var(--tw-shadow-color)`,
+          }),
+        },
+        { values: theme("shadow") }
       );
     }),
   ],

@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { range } from "ramda";
 import { Fragment } from "react";
-import { useBreakPoint } from "~/hooks/useMediaQuery";
 import { card, section, flex } from "~/styles/common";
 import { percent } from "~/utils/math";
 
@@ -20,14 +19,27 @@ function Card(props: CardProps) {
         card,
         "border-4 p-8",
         "text-center md:text-left",
-        props.reverseOrder ? "md:flex-row-reverse" : "md:flex-row"
+        props.reverseOrder ? "md:flex-row-reverse" : "md:flex-row",
+        "group",
+        "hover:border-primary-1",
+        "shadow-primary-1 hover:shadow-lg"
       )}
     >
       <div className={clsx(flex.center, "md:flex-1")}>
         <img src={props.image} role="presentation" alt="presentation" />
       </div>
       <div className="md:flex-1">
-        <h3 className="text-2xl font-bold">{props.title}</h3>
+        <h3
+          className={clsx(
+            "text-2xl font-bold",
+            "group-hover:text-primary-1",
+            "group-hover:text-shadow-md",
+            "group-hover:shadow-primary-1/50"
+            //
+          )}
+        >
+          {props.title}
+        </h3>
 
         <div className="mt-4 flex flex-col gap-2">
           {props.times.map((time, index) => (
@@ -82,7 +94,7 @@ function Description() {
         <strong
           className={clsx(
             "mx-4",
-            "text-shadow shadow-white",
+            "shadow-white/75 text-shadow-lg",
             "text-3xl lg:text-5xl"
             //
           )}

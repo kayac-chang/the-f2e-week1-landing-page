@@ -145,7 +145,11 @@ function Header() {
                 className={clsx(
                   button.outline,
                   "block text-center",
-                  "py-2 px-6"
+                  "py-2 px-6",
+                  "hover:text-secondary-1",
+                  "hover:bg-secondary-1/10",
+                  "hover:border-secondary-1",
+                  "hover:shadow-secondary-1 hover:shadow-md"
                 )}
                 href={links.register}
               >
