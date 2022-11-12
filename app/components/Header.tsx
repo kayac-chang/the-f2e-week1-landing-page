@@ -2,11 +2,10 @@ import SVG from "~/components/SVG";
 import clsx from "clsx";
 import { button, flex, tab as _tab, theme } from "~/styles/common";
 import { useToggle } from "~/hooks/useToggle";
+import { AnimatePresence, motion } from "framer-motion";
 
-/* === Styles === */
 const tab = clsx(_tab, "py-4");
 
-/* === Data === */
 const links = Object.freeze({
   news: "https://2022.thef2e.com/news",
   resources: "https://hexschool.tw/OsAcp",
@@ -14,13 +13,18 @@ const links = Object.freeze({
   register: "https://2022.thef2e.com/signup",
 });
 
-/* === Components === */
 function Header() {
   const [isMenuOpen, toggleMenu] = useToggle();
   return (
     <header className="related z-10 w-full font-noto-sans-tc">
       {/* sm */}
-      <div className={clsx("px-4 py-5 lg:hidden", flex.row_center, theme.main)}>
+      <div
+        className={clsx(
+          "relative z-10 px-4 py-5 lg:hidden",
+          flex.row_center,
+          theme.main
+        )}
+      >
         {/* menu trigger */}
         <button
           type="button"
@@ -47,61 +51,75 @@ function Header() {
         </button>
       </div>
 
-      {isMenuOpen && (
-        <>
-          {/* backdrop */}
-          <div
-            className="fixed inset-0 -z-10 bg-black/25"
-            onClick={toggleMenu}
-          />
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* backdrop */}
+            <motion.div
+              className="fixed inset-0 -z-10 bg-black/25"
+              onClick={toggleMenu}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
 
-          {/* menu */}
-          <nav className={clsx("absolute left-0 w-full px-4", theme.main)}>
-            {/* close button */}
-            <div className="flex py-2">
-              <button
-                type="button"
-                aria-label="close menu"
-                className="ml-auto"
-                onClick={toggleMenu}
-              >
-                <SVG className="w-8" src={require("~/assets/icon/close.svg")} />
-              </button>
-            </div>
-
-            {/* nav links */}
-            <ul className="flex flex-col gap-8 pb-8 text-center">
-              <li>
-                <a className={tab} href={links.news}>
-                  關卡資訊
-                </a>
-              </li>
-              <li>
-                <a className={tab} href={links.resources}>
-                  攻略資源
-                </a>
-              </li>
-              <li>
-                <a className={tab} href={links.jobs}>
-                  求職專區
-                </a>
-              </li>
-              <li>
-                <a
-                  className={clsx(
-                    button.outline,
-                    "block text-center",
-                    "py-2 px-6"
-                  )}
-                  href={links.register}
+            {/* menu */}
+            <motion.nav
+              className={clsx("absolute left-0 w-full px-4", theme.main)}
+              initial={{ opacity: 0 }}
+              animate={{ y: ["-30%", "0%"], opacity: 1 }}
+              exit={{ y: "-30%", opacity: 0 }}
+              transition={{ ease: "circOut", duration: 0.5 }}
+            >
+              {/* close button */}
+              <div className="flex py-2">
+                <button
+                  type="button"
+                  aria-label="close menu"
+                  className="ml-auto"
+                  onClick={toggleMenu}
                 >
-                  登入
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </>
-      )}
+                  <SVG
+                    className="w-8"
+                    src={require("~/assets/icon/close.svg")}
+                  />
+                </button>
+              </div>
+
+              {/* nav links */}
+              <ul className="flex flex-col gap-8 pb-8 text-center">
+                <li>
+                  <a className={tab} href={links.news}>
+                    關卡資訊
+                  </a>
+                </li>
+                <li>
+                  <a className={tab} href={links.resources}>
+                    攻略資源
+                  </a>
+                </li>
+                <li>
+                  <a className={tab} href={links.jobs}>
+                    求職專區
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className={clsx(
+                      button.outline,
+                      "block text-center",
+                      "py-2 px-6"
+                    )}
+                    href={links.register}
+                  >
+                    登入
+                  </a>
+                </li>
+              </ul>
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* lg */}
       <div className="hidden items-center px-4 py-5 lg:flex">
