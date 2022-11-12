@@ -1,5 +1,5 @@
 import type { ComponentProps, MouseEvent } from "react";
-import { isValidElement, useContext, useEffect, useRef, useState } from "react";
+import { isValidElement, useContext, useState } from "react";
 import { createContext } from "react";
 import { deepForEach } from "react-children-utilities";
 import invariant from "tiny-invariant";

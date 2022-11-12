@@ -4,7 +4,6 @@ import SVG from "~/components/SVG";
 import { badge, card, section } from "~/styles/common";
 import type { Variants } from "framer-motion";
 import { links } from "~/utils/const";
-import { useBreakPoint } from "~/hooks/useMediaQuery";
 
 const flip: Variants = {
   initial: {
