@@ -1,13 +1,5 @@
-import type {
-  ComponentProps,
-  MouseEvent} from "react";
-import {
-  isValidElement,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import type { ComponentProps, MouseEvent } from "react";
+import { isValidElement, useContext, useEffect, useRef, useState } from "react";
 import { createContext } from "react";
 import { deepForEach } from "react-children-utilities";
 import invariant from "tiny-invariant";
@@ -68,17 +60,6 @@ type TabProps = ComponentProps<"button"> & {
 };
 function Tab(props: TabProps) {
   const context = useTabsContext("Tabs.Tab should be using inside Tabs.Root");
-  const ref = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (context.currentActive !== props.value) return;
-
-    ref.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "center",
-    });
-  }, [context.currentActive, props.value]);
 
   function onClick(event: MouseEvent<HTMLButtonElement>) {
     props.onClick?.(event);
@@ -87,7 +68,6 @@ function Tab(props: TabProps) {
 
   return (
     <button
-      ref={ref}
       type="button"
       role="tab"
       className={props.className}

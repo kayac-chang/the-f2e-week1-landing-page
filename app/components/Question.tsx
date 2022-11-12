@@ -1,16 +1,14 @@
 import clsx from "clsx";
+import { motion } from "framer-motion";
 import SVG from "~/components/SVG";
 import Tabs from "~/components/Tabs";
-import { card, flex, section, button } from "~/styles/common";
+import { tab as _tab, card, flex, section, button } from "~/styles/common";
+import { links } from "~/utils/const";
 
 const tab = clsx(
-  "relative",
-  "aria-!selected:text-neutral-2",
-  "aria-!selected:after:hidden",
-  "after:block",
-  "after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2",
-  "after:h-1.5 after:w-5 after:rounded-3xl",
-  "shadow-secondary-1 after:bg-secondary-1 after:shadow",
+  _tab,
+  "aria-selected:text-white",
+  "aria-selected:after:opacity-100",
   "[&>*]:aria-selected:text-shadow [&>*]:aria-selected:shadow-white"
 );
 
@@ -31,6 +29,7 @@ const panel = clsx(
 function Question() {
   return (
     <section
+      data-root
       className={clsx(
         section,
         "font-noto-sans-tc",
@@ -336,11 +335,20 @@ function Question() {
       </Tabs.Root>
 
       <div className="mt-8">
-        <button
+        <motion.a
+          whileHover={{
+            filter: `brightness(1.2)`,
+          }}
+          whileTap={{
+            scale: 0.9,
+            filter: `brightness(1.5)`,
+            boxShadow: `0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)`,
+          }}
           className={clsx(button.yellow, "px-10 py-3", "text-xl font-bold")}
+          href={links.register}
         >
           立即報名
-        </button>
+        </motion.a>
       </div>
     </section>
   );
