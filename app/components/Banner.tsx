@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { GlitchText, NeonText } from "~/components/RichText";
 import SVG from "~/components/SVG";
 import Marquee from "~/components/Marquee";
-import { button, section } from "~/styles/common";
+import { button, flex, section } from "~/styles/common";
 import { transform } from "~/utils/css";
 import { useAnimationSeq } from "~/utils/animation";
 import type { AnimationControls } from "framer-motion";
@@ -188,9 +188,9 @@ function Banner(props: ComponentProps<"section">) {
       className={clsx(
         props.className,
         section,
-        "pt-40",
-        "sm:pt-60",
-        "items-center text-center"
+        flex.center,
+        "text-center",
+        "relative"
       )}
     >
       <div className="relative">
@@ -347,7 +347,7 @@ function Banner(props: ComponentProps<"section">) {
       </motion.button>
 
       {/* marquee */}
-      <div className="mt-auto w-full">
+      <div className="absolute bottom-0 w-full">
         <Marquee className="gap-6">
           <NeonText className="h4 w-max font-monument-extended uppercase">
             join us

@@ -47,7 +47,7 @@ const move: Record<string, Variants> = {
 function Solution() {
   return (
     <section
-      className={clsx(section, "relative", "bg-center")}
+      className={clsx(section, "relative", "overflow-hidden bg-center")}
       style={{
         backgroundImage: `url(${require("~/assets/image/background.jpg")})`,
       }}

@@ -1,18 +1,24 @@
 import { percent } from "~/utils/math";
 import type { WheelEvent } from "react";
+import type { Pred } from "ramda";
 
-export function getScrollPercent(target: HTMLElement) {
+export function getScrollPercent(target: HTMLElement): number {
   return percent(target.scrollTop, target.scrollHeight - target.clientHeight);
 }
 export function isReachBottom(target: HTMLElement): boolean {
-  return getScrollPercent(target) >= 100;
+  if (target.scrollHeight - target.clientHeight > 0)
+    return getScrollPercent(target) >= 100;
+  return true;
 }
 export function isReachTop(target: HTMLElement): boolean {
-  return getScrollPercent(target) <= 0;
+  if (target.scrollHeight - target.clientHeight > 0)
+    return getScrollPercent(target) <= 0;
+  return true;
 }
 
-export function getWheelDirection(event: WheelEvent) {
-  return Math.sign(event.deltaY);
+type Direction = 1 | 0 | -1;
+export function getWheelDirection(event: WheelEvent): Direction {
+  return Math.sign(event.deltaY) as Direction;
 }
 export function isWheelDown(event: WheelEvent): boolean {
   return getWheelDirection(event) === 1;
@@ -24,18 +30,33 @@ export function isWheelNotMove(event: WheelEvent): boolean {
   return getWheelDirection(event) === 0;
 }
 
-export function isOverScroll(event: WheelEvent<HTMLElement>): boolean {
-  if (isWheelDown(event) && isReachBottom(event.currentTarget)) {
-    return true;
-  }
-  if (isWheelUp(event) && isReachTop(event.currentTarget)) {
-    return true;
-  }
-  return false;
+function* traverse(pred: Pred<[HTMLElement]>, root: HTMLElement) {
+  const walker = document.createTreeWalker(
+    root,
+    NodeFilter.SHOW_ELEMENT,
+    (node) =>
+      pred(node as HTMLElement)
+        ? NodeFilter.FILTER_ACCEPT
+        : NodeFilter.FILTER_SKIP
+  );
+
+  while (walker.nextNode()) yield walker.currentNode as HTMLElement;
+
+  return;
 }
 
-// we want user only navigate to next section when they reach to the edge of the page,
-// so we have to prevent event propagation to full page scroll.
-export function onlyPropagationWhenOverScroll(event: WheelEvent<HTMLElement>) {
-  return !isOverScroll(event) && event.stopPropagation();
+function isScrollable(element: HTMLElement): boolean {
+  return window.getComputedStyle(element).overflowY !== "hidden";
+}
+
+export function isOverScroll(event: WheelEvent<HTMLElement>): boolean {
+  const target = Array.from(traverse(isScrollable, event.currentTarget)).at(0);
+
+  if (!target) return false;
+
+  if (isWheelDown(event) && isReachBottom(target)) return true;
+
+  if (isWheelUp(event) && isReachTop(target)) return true;
+
+  return false;
 }

@@ -2,7 +2,6 @@ import clsx from "clsx";
 import SVG from "~/components/SVG";
 import Tabs from "~/components/Tabs";
 import { card, flex, section, button } from "~/styles/common";
-import { onlyPropagationWhenOverScroll } from "~/utils/dom";
 
 const tab = clsx(
   "relative",
@@ -36,10 +35,8 @@ function Question() {
         section,
         "font-noto-sans-tc",
         "px-4 py-16",
-        "items-center gap-4",
-        "overflow-scroll"
+        "items-center gap-4"
       )}
-      onWheel={onlyPropagationWhenOverScroll}
     >
       <h2
         className={clsx(

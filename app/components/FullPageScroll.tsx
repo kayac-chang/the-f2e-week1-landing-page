@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, isValidElement, cloneElement } from "react";
-import { cond, pipe } from "ramda";
+import { cond, pipe, when } from "ramda";
 import { isNegative, isPositive } from "ramda-adjunct";
 import debounce from "~/utils/debounce";
 import useCounter from "~/hooks/useCounter";
@@ -11,15 +11,16 @@ import type {
   ElementType,
 } from "react";
 import type { PolymorphicComponentProps } from "~/utils/types";
-import { getWheelDirection } from "~/utils/dom";
+import { getWheelDirection, isOverScroll } from "~/utils/dom";
 import { merge } from "~/utils/animation";
 import { deepFilter } from "~/utils/children";
 
 const variants: Variants = {
-  initial: { opacity: 0 },
+  initial: { opacity: 0, display: "none" },
   animate: {
     opacity: [0, 1],
     y: [30, 0],
+    display: "block",
     transition: {
       duration: 0.5,
       delayChildren: 0.8,
@@ -42,7 +43,7 @@ export function Page({ show, ...props }: PageProps) {
         <motion.div
           {...props}
           layout
-          className="h-full"
+          className="h-full overflow-scroll"
           initial="initial"
           animate="animate"
           exit="exit"
@@ -66,12 +67,15 @@ export function Pages<E extends ElementType>(
   const onWheel = useMemo(
     () =>
       debounce.byLeadFrame(
-        pipe(
-          getWheelDirection,
-          cond([
-            [isPositive, setPage.inc],
-            [isNegative, setPage.dec],
-          ])
+        when(
+          isOverScroll,
+          pipe(
+            getWheelDirection,
+            cond([
+              [isPositive, setPage.inc],
+              [isNegative, setPage.dec],
+            ])
+          )
         )
       ),
     [setPage]
@@ -98,15 +102,16 @@ export function Pages<E extends ElementType>(
 
   const handler = {
     onWheel,
-    ...onPointer,
+    // ...onPointer,
   };
   const Component = props.as ?? "div";
 
   return (
-    <Component {...props} {...handler}>
+    <Component {...props}>
       {children.map((child, index) =>
         cloneElement(child, {
           ...child.props,
+          ...handler,
           key: index,
           show: page === index,
         })

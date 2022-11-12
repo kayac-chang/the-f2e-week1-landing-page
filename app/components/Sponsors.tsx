@@ -1,21 +1,16 @@
 import clsx from "clsx";
 import { flex, section } from "~/styles/common";
-import { onlyPropagationWhenOverScroll } from "~/utils/dom";
 
 function Sponsors() {
   return (
     <section
       className={clsx(
         section,
-        flex.col_center,
+        flex.center,
         "font-noto-sans-tc",
         "bg-neutral-3",
-        "text-center",
-        "gap-8",
-        "px-8 py-16 sm:py-64",
-        "overflow-scroll"
+        "text-center"
       )}
-      onWheel={onlyPropagationWhenOverScroll}
     >
       <h2 className="relative">
         <img
@@ -36,7 +31,7 @@ function Sponsors() {
         <div className="text-2xl font-bold">鑽石級贊助商</div>
       </h2>
 
-      <ul className={clsx("grid gap-12 sm:grid-cols-3")}>
+      <ul className="mt-8 grid gap-6 sm:grid-cols-3 sm:gap-12">
         <li>
           <div className="w-40">
             <img

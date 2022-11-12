@@ -11,7 +11,7 @@ export const flex = {
   center: "flex justify-center items-center",
   nowrap: "flex flex-nowrap items-center [&>*]:whitespace-nowrap",
 };
-export const section = clsx(flex.col, "w-full h-full overflow-hidden");
+export const section = clsx(flex.col, "w-full h-full overflow-x-hidden");
 
 export const card = clsx(flex.col_center, "gap-4 rounded-3xl");
 export const badge = "bg-secondary-1 w-max py-1 px-2 rounded-xl";

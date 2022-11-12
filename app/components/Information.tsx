@@ -1,8 +1,6 @@
 import clsx from "clsx";
 import SVG from "~/components/SVG";
-import { useBreakPoint } from "~/hooks/useMediaQuery";
 import { badge, card, section } from "~/styles/common";
-import { onlyPropagationWhenOverScroll } from "~/utils/dom";
 
 type CardProps = {
   badge: string;
@@ -53,14 +51,10 @@ function Information() {
       className={clsx(
         section,
         "font-noto-sans-tc",
-        "px-4 py-16 lg:py-32",
+        "px-4 py-16 lg:pt-32",
         "items-center gap-12",
-        "text-center",
-        "overflow-scroll"
+        "text-center"
       )}
-      {...(!useBreakPoint("lg") && {
-        onWheel: onlyPropagationWhenOverScroll,
-      })}
     >
       <h2
         className={clsx(

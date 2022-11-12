@@ -3,7 +3,6 @@ import { range } from "ramda";
 import { Fragment } from "react";
 import { useBreakPoint } from "~/hooks/useMediaQuery";
 import { card, section, flex } from "~/styles/common";
-import { onlyPropagationWhenOverScroll } from "~/utils/dom";
 import { percent } from "~/utils/math";
 
 type CardProps = {
@@ -57,15 +56,11 @@ function Description() {
       className={clsx(
         section,
         "font-noto-sans-tc",
-        "px-4 py-16 lg:py-32",
+        "px-4 py-16 lg:pt-32",
         "items-center gap-12",
         "text-center",
-        "bg-neutral-4",
-        "overflow-scroll"
+        "bg-neutral-4"
       )}
-      {...(!useBreakPoint("lg") && {
-        onWheel: onlyPropagationWhenOverScroll,
-      })}
     >
       <h2 className="flex items-center">
         <img
