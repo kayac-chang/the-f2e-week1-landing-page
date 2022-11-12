@@ -22,13 +22,11 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href:
-      "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=optional",
+    href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=optional",
   },
   {
     rel: "stylesheet",
-    href:
-      "https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=optional",
+    href: "https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=optional",
   },
   {
     rel: "stylesheet",
@@ -48,6 +46,8 @@ export const links: LinksFunction = () => [
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "The F2E 前端 & UI 修煉精神時光屋",
+  description:
+    "你想變強嗎？你想獲得力量嗎？你想透過前端 / UI 改變你的生活，但找不到地方修練嗎？如果你的答案是「Yes」那麼你來對地方了！",
   viewport: "width=device-width,initial-scale=1",
   "og:image": require("~/assets/image/preview.jpg"),
 });
