@@ -1,9 +1,67 @@
 import clsx from "clsx";
-import { card, section } from "~/styles/common";
+import { card as _card, section } from "~/styles/common";
+import { motion } from "framer-motion";
+import { merge } from "~/utils/animation";
+import type { ComponentProps } from "react";
+import type { TargetAndTransition, Variants } from "framer-motion";
+
+const card = clsx(
+  _card,
+  "bg-neutral-3",
+  "p-6",
+  "glassy",
+  "before:bg-gradient-to-br",
+  "before:gradient-card-solid",
+  "after:gradient-decoration after:bg-gradient-to-br",
+  "after:opacity-0",
+  "after:transition-opacity",
+  "hover:after:opacity-100"
+);
+
+const bouncing: Variants = {
+  animate: {
+    transition: {
+      type: "spring",
+      bounce: 0.4,
+      duration: 0.8,
+    },
+  },
+};
+
+const move_up: Variants = {
+  animate: {
+    y: -20,
+  },
+};
+
+const stagger: Variants = {
+  animate: {
+    transition: {
+      staggerChildren: 0.5,
+    },
+  },
+};
+
+const fade_in: Variants = {
+  animate: {
+    opacity: [0, 1],
+  },
+};
+
+function Card(props: ComponentProps<"div">) {
+  return (
+    <motion.div
+      whileHover={merge(move_up, bouncing)["animate"] as TargetAndTransition}
+    >
+      <div className={clsx(card, "h-full")} {...props} />
+    </motion.div>
+  );
+}
 
 function Award() {
   return (
-    <section
+    <motion.section
+      variants={stagger}
       className={clsx(
         section,
         "font-noto-sans-tc",
@@ -16,32 +74,52 @@ function Award() {
           className={clsx(
             "text-center font-bold",
             "text-2xl md:text-3xl lg:text-4xl",
-            "text-shadow shadow-white"
+            "text-shadow shadow-white",
+            "space-y-2"
           )}
         >
           <div>區區修煉已經無法滿足了嗎？</div>
-          <div>還有比賽等著你！</div>
+          <motion.div variants={fade_in}>還有比賽等著你！</motion.div>
         </h2>
 
-        <div className="flex items-baseline justify-between border-b-4 pb-1">
-          <img
-            className="w-8"
-            src={require("~/assets/image/decoration/flag.png")}
-            role="presentation"
-            alt="presentation"
-          />
+        <div className="flex flex-row-reverse items-baseline border-b-4 pb-1">
+          <div className="flex-1">
+            <motion.img
+              variants={{
+                animate: {
+                  marginLeft: 0,
+                  transition: { duration: 1 },
+                },
+              }}
+              className="ml-auto w-20 translate-y-2"
+              src={require("~/assets/image/decoration/car.png")}
+              role="presentation"
+              alt="presentation"
+            />
+          </div>
 
-          <img
-            className="w-20 translate-y-2"
-            src={require("~/assets/image/decoration/car.png")}
-            role="presentation"
-            alt="presentation"
-          />
+          <motion.div
+            variants={{
+              animate: {
+                rotate: -40,
+                x: -10,
+                y: -15,
+                transition: { delay: 2.2 },
+              },
+            }}
+          >
+            <img
+              className="w-8"
+              src={require("~/assets/image/decoration/flag.png")}
+              role="presentation"
+              alt="presentation"
+            />
+          </motion.div>
         </div>
       </header>
 
       <div className="grid max-w-md gap-6 lg:max-w-screen-lg lg:grid-cols-2">
-        <div className={clsx(card, "bg-neutral-3", "p-6", "glassy")}>
+        <Card>
           <img
             src={require("~/assets/image/note.png")}
             role="presentation"
@@ -64,9 +142,9 @@ function Award() {
               由評審進行直播公布名單！
             </p>
           </div>
-        </div>
+        </Card>
 
-        <div className={clsx(card, "bg-neutral-3", "p-6", "glassy")}>
+        <Card>
           <img
             src={require("~/assets/image/coin.png")}
             role="presentation"
@@ -117,9 +195,9 @@ function Award() {
           </div>
 
           <p className="mt-2 w-full text-xl">以上皆提供完賽數位獎狀</p>
-        </div>
+        </Card>
       </div>
-    </section>
+    </motion.section>
   );
 }
 export default Award;

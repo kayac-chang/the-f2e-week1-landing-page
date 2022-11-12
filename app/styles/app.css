@@ -12,7 +12,8 @@
     background-clip: padding-box; /* !importanté */
     border: solid $border transparent; /* !importanté */
 
-    &:before {
+    &:before,
+    &:after {
       content: "";
       position: absolute;
       top: 0;
@@ -22,11 +23,6 @@
       z-index: -1;
       margin: -$border; /* !importanté */
       border-radius: inherit; /* !importanté */
-      background: linear-gradient(
-        100.38deg,
-        #313a65 3.95%,
-        rgba(49, 58, 101, 0) 100%
-      );
     }
   }
 }
@@ -42,6 +38,10 @@
   .gradient-card-stroke {
     @apply from-[#313A65] to-[#6E77E9];
   }
+  .gradient-card-solid {
+    @apply from-[#313A65];
+  }
+
   .text-clip {
     -webkit-background-clip: text;
     -webkit-text-stroke: 4px transparent;
