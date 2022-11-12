@@ -34,8 +34,8 @@ function Question() {
       className={clsx(
         section,
         "font-noto-sans-tc",
-        "px-4 py-16",
-        "items-center gap-4"
+        "p-4 md:py-16",
+        "items-center gap-4 lg:gap-12"
       )}
     >
       <h2
@@ -56,8 +56,8 @@ function Question() {
             "text-xl",
             "gap-6",
             "overflow-auto",
-            "[&>*]:py-4",
-            "p-4 lg:px-12"
+            "[&>*]:pb-4",
+            "px-4 pb-2 lg:px-12"
           )}
         >
           <Tabs.Tab className={tab} value="common">

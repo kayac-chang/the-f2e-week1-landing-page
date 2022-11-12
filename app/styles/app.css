@@ -38,9 +38,6 @@
   .gradient-card-stroke {
     @apply from-[#313A65] to-[#6E77E9];
   }
-  .gradient-card-solid {
-    @apply from-[#313A65];
-  }
 
   .text-clip {
     -webkit-background-clip: text;

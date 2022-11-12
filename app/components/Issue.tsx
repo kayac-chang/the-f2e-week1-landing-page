@@ -5,7 +5,7 @@ import { section } from "~/styles/common";
 import { easeOutElastic } from "~/utils/ease";
 import type { Variants } from "framer-motion";
 
-const variants: Variants = {
+const bump_out: Variants = {
   animate: {
     opacity: [0, 1],
     scale: [0, 1],
@@ -34,7 +34,7 @@ function Issue() {
 
       {/* issue 1 */}
       <motion.div
-        variants={variants}
+        variants={bump_out}
         className={clsx(
           "flex flex-1 flex-col justify-center",
           "mx-auto w-full max-w-lg"
@@ -114,7 +114,7 @@ function Issue() {
 
       {/* issue 2 */}
       <motion.div
-        variants={variants}
+        variants={bump_out}
         className={clsx(
           "flex flex-1 flex-col justify-center",
           "mx-auto w-full max-w-lg"
@@ -194,7 +194,7 @@ function Issue() {
 
       {/* issue 3 */}
       <motion.div
-        variants={variants}
+        variants={bump_out}
         className={clsx(
           "flex flex-1 flex-col justify-center",
           "mx-auto w-full max-w-lg"
