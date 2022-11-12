@@ -1,17 +1,11 @@
-import SVG from "~/components/SVG";
 import clsx from "clsx";
-import { button, flex, tab as _tab, theme } from "~/styles/common";
-import { useToggle } from "~/hooks/useToggle";
 import { AnimatePresence, motion } from "framer-motion";
+import SVG from "~/components/SVG";
+import { useToggle } from "~/hooks/useToggle";
+import { links } from "~/utils/const";
+import { button, flex, tab as _tab, theme } from "~/styles/common";
 
 const tab = clsx(_tab, "py-4");
-
-const links = Object.freeze({
-  news: "https://2022.thef2e.com/news",
-  resources: "https://hexschool.tw/OsAcp",
-  jobs: "https://2022.thef2e.com/jobs",
-  register: "https://2022.thef2e.com/signup",
-});
 
 function Header() {
   const [isMenuOpen, toggleMenu] = useToggle();

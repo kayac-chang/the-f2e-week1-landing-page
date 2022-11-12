@@ -10,6 +10,7 @@ import { useAnimationSeq } from "~/utils/animation";
 import type { AnimationControls } from "framer-motion";
 import type { ComponentProps } from "react";
 import type { Vec2 } from "~/utils/css";
+import { links } from "~/utils/const";
 
 type DecorationProps = ComponentProps<"div">;
 
@@ -319,12 +320,9 @@ function Banner(props: ComponentProps<"section">) {
       </h1>
 
       {/* register */}
-      <motion.button
-        type="button"
+      <motion.a
         whileHover={{
-          scale: 1.2,
-          filter: `brightness(1.5)`,
-          boxShadow: `0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)`,
+          filter: `brightness(1.2)`,
         }}
         whileTap={{
           scale: 0.9,
@@ -342,9 +340,10 @@ function Banner(props: ComponentProps<"section">) {
           "px-10 py-3",
           "xl:px-12 xl:py-4"
         )}
+        href={links.register}
       >
         立即報名
-      </motion.button>
+      </motion.a>
 
       {/* marquee */}
       <div className="absolute bottom-0 w-full">

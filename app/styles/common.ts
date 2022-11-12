@@ -24,13 +24,15 @@ export const tab = clsx(
   "relative",
   "text-neutral-2",
   "hover:text-white",
-  "hover:after:block",
+  "hover:after:opacity-100",
 
-  "after:hidden",
+  "after:opacity-0",
   "after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2",
   "after:h-1.5 after:w-5 after:rounded-3xl",
   "after:bg-secondary-1 after:shadow",
+  "after:transition-opacity after:duration-200",
 
   "shadow-secondary-1",
-  "[&>*]:hover:text-shadow [&>*]:hover:shadow-white"
+  "[&>*]:hover:text-shadow [&>*]:hover:shadow-white",
+  "transition-all duration-200"
 );
