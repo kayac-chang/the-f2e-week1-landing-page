@@ -39,7 +39,7 @@ export const links: LinksFunction = () => [
   {
     rel: "icon",
     type: "image/x-icon",
-    href: "https://2022.thef2e.com/favicon.ico",
+    href: require("~/assets/favicon.ico"),
   },
 ];
 

@@ -1,5 +1,19 @@
 import clsx from "clsx";
 import { flex, section } from "~/styles/common";
+import { links } from "~/utils/const";
+
+const card = clsx(
+  "block w-44 [&>*]:p-2 [&>*]:relative",
+  "bg-white",
+  "rounded-[40px] overflow-hidden",
+  "relative",
+  "before:bg-gradient-to-br before:gradient-decoration",
+  "before:absolute before:inset-0",
+  "before:opacity-0",
+  "hover:before:opacity-100",
+  "before:transition-opacity before:duration-300"
+  //
+);
 
 function Sponsors() {
   return (
@@ -33,31 +47,31 @@ function Sponsors() {
 
       <ul className="mt-8 grid gap-6 sm:grid-cols-3 sm:gap-12">
         <li>
-          <div className="w-40">
+          <a className={card} href={links.block_studio}>
             <img
               className="w-full"
               src={require("~/assets/sponsor/block-studio-default.png")}
               alt="block studio"
             />
-          </div>
+          </a>
         </li>
         <li>
-          <div className="w-40">
+          <a className={card} href={links.kdan}>
             <img
               className="w-full"
               src={require("~/assets/sponsor/kdan-default.png")}
               alt="kdan"
             />
-          </div>
+          </a>
         </li>
         <li>
-          <div className="w-40">
+          <a className={card} href={links.titansoft}>
             <img
               className="w-full"
               src={require("~/assets/sponsor/titansoft-default.png")}
               alt="titansoft"
             />
-          </div>
+          </a>
         </li>
       </ul>
     </section>
