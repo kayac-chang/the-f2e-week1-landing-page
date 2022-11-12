@@ -30,7 +30,7 @@ export function isWheelNotMove(event: WheelEvent): boolean {
   return getWheelDirection(event) === 0;
 }
 
-function* traverse(pred: Pred<[HTMLElement]>, root: HTMLElement) {
+export function* traverse(pred: Pred<[HTMLElement]>, root: HTMLElement) {
   const walker = document.createTreeWalker(
     root,
     NodeFilter.SHOW_ELEMENT,
@@ -45,13 +45,18 @@ function* traverse(pred: Pred<[HTMLElement]>, root: HTMLElement) {
   return;
 }
 
-function isScrollable(element: HTMLElement): boolean {
+export function isScrollable(element: HTMLElement): boolean {
   return window.getComputedStyle(element).overflowY !== "hidden";
 }
 
-export function isOverScroll(event: WheelEvent<HTMLElement>): boolean {
-  const target = Array.from(traverse(isScrollable, event.currentTarget)).at(0);
+export function getScrollableElement(
+  element: HTMLElement
+): HTMLElement | undefined {
+  return Array.from(traverse(isScrollable, element)).at(0);
+}
 
+export function isWheelOverScroll(event: WheelEvent<HTMLElement>): boolean {
+  const target = getScrollableElement(event.currentTarget);
   if (!target) return false;
 
   if (isWheelDown(event) && isReachBottom(target)) return true;

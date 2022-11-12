@@ -11,16 +11,20 @@ import type {
   ElementType,
 } from "react";
 import type { PolymorphicComponentProps } from "~/utils/types";
-import { getWheelDirection, isOverScroll } from "~/utils/dom";
+import {
+  getScrollableElement,
+  getWheelDirection,
+  isReachBottom,
+  isReachTop,
+  isWheelOverScroll,
+} from "~/utils/dom";
 import { merge } from "~/utils/animation";
 import { deepFilter } from "~/utils/children";
 
 const variants: Variants = {
-  initial: { opacity: 0, display: "none" },
+  initial: { opacity: 0 },
   animate: {
     opacity: [0, 1],
-    y: [30, 0],
-    display: "block",
     transition: {
       duration: 0.5,
       delayChildren: 0.8,
@@ -68,7 +72,7 @@ export function Pages<E extends ElementType>(
     () =>
       debounce.byLeadFrame(
         when(
-          isOverScroll,
+          isWheelOverScroll,
           pipe(
             getWheelDirection,
             cond([
@@ -84,25 +88,28 @@ export function Pages<E extends ElementType>(
   const onPointer = useMemo(() => {
     let start = 0;
 
-    function onPointerDown(event: PointerEvent) {
-      start = event.pageY;
+    function onPointerDown(event: PointerEvent<HTMLElement>) {
+      if (event.pageY) start = event.pageY;
     }
 
-    function onPointerUp(event: PointerEvent) {
+    function onPointerUp(event: PointerEvent<HTMLElement>) {
+      const target = getScrollableElement(event.currentTarget);
+      if (!target) return;
+
       const delta = -Math.sign(event.pageY - start);
-
-      cond([
-        [isPositive, setPage.inc],
-        [isNegative, setPage.dec],
-      ])(delta);
+      if (isPositive(delta) && isReachBottom(target)) return setPage.inc();
+      if (isNegative(delta) && isReachTop(target)) return setPage.dec();
     }
 
-    return { onPointerUp, onPointerDown };
+    return {
+      onPointerDownCapture: onPointerDown,
+      onPointerUpCapture: onPointerUp,
+    };
   }, [setPage]);
 
   const handler = {
     onWheel,
-    // ...onPointer,
+    ...onPointer,
   };
   const Component = props.as ?? "div";
 
