@@ -1,5 +1,7 @@
 # The F2E WEEK1 - Landing Page
 
+![preview](./app/assets/image/preview.jpg)
+
 ## Design Concept
 
 ### 整體網站視覺
